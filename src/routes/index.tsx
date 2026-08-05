@@ -56,7 +56,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-/* -------- Reveal on Scroll Component -------- */
+/* -------- Standardized Reveal on Scroll Component -------- */
 function Reveal({
   children,
   delay = 0,
@@ -81,7 +81,7 @@ function Reveal({
           io.disconnect();
         }
       },
-      { threshold: 0.12 }
+      { threshold: 0.1 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -93,8 +93,8 @@ function Reveal({
       ref={ref as any}
       style={{
         opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 1s ${delay}ms cubic-bezier(.22,1,.36,1), transform 1s ${delay}ms cubic-bezier(.22,1,.36,1)`,
+        transform: shown ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.7s ${delay}ms cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s ${delay}ms cubic-bezier(0.16, 1, 0.3, 1)`,
       }}
       className={className}
     >
@@ -103,53 +103,30 @@ function Reveal({
   );
 }
 
-/* -------- Eyebrow & Decorative Marks -------- */
+/* -------- Standardized Section Eyebrow -------- */
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold-antique">
-    <span className="h-px w-8 bg-gold/60" />
-    <span className="font-semibold">{children}</span>
-    <span className="h-px w-8 bg-gold/60" />
+  <div className="flex items-center justify-center gap-3 text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
+    <span className="h-px w-6 bg-gold/50" />
+    <span>{children}</span>
+    <span className="h-px w-6 bg-gold/50" />
   </div>
 );
 
-const SacredMandalaVector = () => (
-  <svg
-    viewBox="0 0 500 500"
-    className="absolute -right-20 top-1/2 -translate-y-1/2 h-[600px] w-[600px] text-gold/15 pointer-events-none anim-rotate-slow hidden lg:block"
-    fill="none"
-  >
-    <circle cx="250" cy="250" r="240" stroke="currentColor" strokeWidth="0.8" strokeDasharray="4 4" />
-    <circle cx="250" cy="250" r="200" stroke="currentColor" strokeWidth="1" />
-    <circle cx="250" cy="250" r="160" stroke="currentColor" strokeWidth="0.5" />
-    <circle cx="250" cy="250" r="110" stroke="currentColor" strokeWidth="1" strokeDasharray="8 8" />
-    <circle cx="250" cy="250" r="60" stroke="currentColor" strokeWidth="1.5" />
-    <path
-      d="M250 10 L250 490 M10 250 L490 250 M80 80 L420 420 M80 420 L420 80"
-      stroke="currentColor"
-      strokeWidth="0.5"
-      opacity="0.7"
-    />
-    {[...Array(12)].map((_, i) => (
-      <circle
-        key={i}
-        cx={250 + 160 * Math.cos((i * Math.PI) / 6)}
-        cy={250 + 160 * Math.sin((i * Math.PI) / 6)}
-        r="8"
-        fill="currentColor"
-        opacity="0.3"
-      />
-    ))}
-  </svg>
+const EyebrowLeft = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
+    <span className="h-px w-6 bg-gold/50" />
+    <span>{children}</span>
+  </div>
 );
 
-/* -------- Sticky Header Navigation -------- */
+/* -------- Standardized Sticky Navigation -------- */
 function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: string) => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -158,61 +135,61 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
   const navLinks = [
     { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
+    { label: "Offerings", href: "#offerings" },
     { label: "Programs", href: "#programs" },
-    { label: "Academy", href: "#academy" },
     { label: "Gallery", href: "#gallery" },
     { label: "Contact", href: "#contact" },
   ];
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-shadow/95 backdrop-blur-md py-3.5 border-b border-gold/20 shadow-lg"
-          : "bg-gradient-to-b from-shadow/90 via-shadow/40 to-transparent py-5"
+          ? "bg-shadow/95 backdrop-blur-md py-3.5 border-b border-gold/25 shadow-md"
+          : "bg-gradient-to-b from-shadow/80 to-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <a href="#hero" className="flex items-center gap-3.5 group">
+        <a href="#hero" className="flex items-center gap-3 group">
           <img
             src="/Logo.jpeg"
             alt="Yugala Radhe Krishna Tapovan Logo"
-            className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border border-gold/60 shadow-md group-hover:scale-105 transition duration-300"
+            className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border border-gold/60 transition duration-300 group-hover:border-gold"
           />
-          <div className="leading-none">
-            <span className="font-display text-sm tracking-[0.25em] text-gold-light group-hover:text-gold transition">
-              YUGALA
+          <div className="leading-tight">
+            <span className="font-display text-sm tracking-[0.2em] text-gold-light group-hover:text-gold transition font-medium block">
+              YUGALA TAPOVAN
             </span>
-            <span className="block font-serif italic text-xs tracking-wider text-ivory/80">
-              Radhe Krishna Tapovan
+            <span className="text-[11px] uppercase tracking-wider text-ivory/70 block">
+              Radhe Krishna Sanctuary
             </span>
           </div>
         </a>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden items-center gap-8 md:flex">
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-xs uppercase tracking-[0.22em] text-ivory/80 transition duration-300 hover:text-gold-light font-medium relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all hover:after:w-full"
+              className="text-xs uppercase tracking-[0.2em] text-ivory/80 transition duration-200 hover:text-gold font-medium py-1"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Desktop CTA Button */}
+        {/* Action Button */}
         <div className="hidden items-center gap-4 md:flex">
           <button
             onClick={() => onOpenConsultation()}
-            className="border border-gold/70 bg-gold/10 px-5 py-2.5 text-xs uppercase tracking-[0.22em] text-gold-light transition duration-300 hover:bg-gold hover:text-shadow font-semibold shadow-gold cursor-pointer"
+            className="rounded-md border border-gold/70 bg-gold/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light transition duration-200 hover:bg-gold hover:text-shadow cursor-pointer"
           >
             Join Our Programs
           </button>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="p-2 text-gold-light md:hidden focus:outline-none"
@@ -222,16 +199,16 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
         </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-gold/30 bg-shadow/98 px-6 py-6 backdrop-blur-xl md:hidden anim-fade-up">
+        <div className="border-b border-gold/30 bg-shadow/98 px-6 py-6 backdrop-blur-xl md:hidden">
           <nav className="flex flex-col gap-4 text-center">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-sm uppercase tracking-[0.25em] text-ivory/90 hover:text-gold transition"
+                className="py-2 text-xs uppercase tracking-[0.25em] text-ivory/90 hover:text-gold transition font-medium"
               >
                 {link.label}
               </a>
@@ -241,7 +218,7 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
                 setMobileMenuOpen(false);
                 onOpenConsultation();
               }}
-              className="mt-4 w-full bg-gold py-3 text-xs uppercase tracking-[0.25em] text-shadow font-bold"
+              className="mt-3 w-full rounded-md bg-gold py-3 text-xs uppercase tracking-[0.2em] text-shadow font-bold"
             >
               Join Our Programs
             </button>
@@ -267,12 +244,12 @@ export function IndexPage() {
   };
 
   const galleryItems = [
-    { title: "Ashram", img: galleryAshram, caption: "Peaceful Ashram Sanctuary Grounds" },
-    { title: "Meditation", img: galleryMeditation, caption: "Guided Meditation & Silence" },
-    { title: "Retreats", img: tapovanImg, caption: "Transformative Spiritual Retreats" },
-    { title: "Workshops", img: diyaImg, caption: "Interactive Wisdom Workshops" },
-    { title: "Krishna Temple", img: galleryTemple, caption: "Divine Radha Krishna Temple Altar" },
-    { title: "Healing Sessions", img: galleryHealing, caption: "Holistic Sound & Energy Healing" },
+    { title: "Ashram Grounds", img: galleryAshram, caption: "Peaceful Ashram Sanctuary Grounds" },
+    { title: "Meditation Hall", img: galleryMeditation, caption: "Guided Meditation & Sacred Silence" },
+    { title: "Retreat Sanctuary", img: tapovanImg, caption: "Transformative Spiritual Retreats" },
+    { title: "Wisdom Circle", img: diyaImg, caption: "Interactive Vedic Learning Workshops" },
+    { title: "Krishna Temple Altar", img: galleryTemple, caption: "Divine Radha Krishna Temple Shrine" },
+    { title: "Sound Healing", img: galleryHealing, caption: "Holistic Sound & Energy Alignment" },
   ];
 
   const testimonials = [
@@ -298,131 +275,108 @@ export function IndexPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-crimson selection:text-ivory overflow-x-hidden">
-      {/* Sacred Loading Screen */}
+      {/* Non-intrusive Entrance Screen */}
       <LoadingScreen />
 
-      {/* Sticky Header Navigation */}
+      {/* Sticky Navigation */}
       <Navigation onOpenConsultation={handleOpenConsultation} />
 
-      {/* 1. HERO SECTION (Dynamic, Sophisticated & Animated) */}
-      <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-shadow text-ivory pt-28 pb-20">
-        {/* Floating Sacred Golden Dust Canvas */}
-        <SacredParticles particleCount={40} />
+      {/* 1. HERO SECTION */}
+      <section id="hero" className="relative min-h-[90vh] flex items-center bg-shadow text-ivory pt-28 pb-20 overflow-hidden">
+        <SacredParticles />
 
-        {/* Hero Background Image with Parallax & Slow Zoom */}
         <div className="absolute inset-0 z-0">
           <img
             src={heroImg}
-            alt="Radha and Krishna in divine love"
-            className="h-full w-full object-cover opacity-45 anim-slow-zoom"
+            alt="Radha and Krishna sanctuary"
+            className="h-full w-full object-cover opacity-35"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-shadow via-shadow/70 to-shadow/50" />
-          <div className="absolute inset-0 bg-radial from-transparent via-shadow/30 to-shadow" />
+          <div className="absolute inset-0 bg-gradient-to-t from-shadow via-shadow/75 to-shadow/40" />
         </div>
 
-        {/* Rotating Sacred Vector Mandala Backdrop */}
-        <SacredMandalaVector />
-
-        {/* Dynamic Animated Pulsing Gold Halos */}
-        <div
-          className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-35 blur-3xl anim-pulse-glow"
-          style={{ background: "radial-gradient(circle, #e3c477 0%, #cf7902 40%, transparent 75%)" }}
-        />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 w-full py-16 flex flex-col justify-center">
-          <div className="max-w-4xl">
-            {/* Dynamic Floating Badge */}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 w-full py-12">
+          <div className="max-w-3xl">
             <Reveal>
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-shadow/80 px-4 py-1.5 backdrop-blur-md anim-float mb-6 shadow-gold">
-                <Sparkles className="h-4 w-4 text-gold animate-spin" style={{ animationDuration: "12s" }} />
-                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-light">
-                  Sacred Radha Krishna Sanctuary
+              <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-shadow/80 px-4 py-1.5 backdrop-blur-md mb-6">
+                <Sparkles className="h-3.5 w-3.5 text-gold" />
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-light">
+                  Radha Krishna Spiritual Sanctuary
                 </span>
               </div>
             </Reveal>
 
-            {/* Main Sophisticated Animated Headline */}
-            <Reveal delay={150}>
-              <h1 className="font-display text-4xl font-light leading-[1.08] text-ivory sm:text-6xl lg:text-7xl tracking-wide">
+            <Reveal delay={100}>
+              <h1 className="font-display text-4xl font-normal leading-[1.15] text-ivory sm:text-5xl lg:text-6xl tracking-tight">
                 Experience Divine Love.
                 <br />
-                <span className="font-serif italic text-shimmer-gold">Awaken Your Inner Self.</span>
+                <span className="text-gradient-gold">Awaken Your Inner Self.</span>
               </h1>
             </Reveal>
 
-            {/* Subheading */}
-            <Reveal delay={300}>
-              <p className="mt-8 max-w-2xl font-serif text-lg leading-relaxed text-ivory/85 sm:text-xl lg:text-2xl font-light">
-                A spiritual sanctuary dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by the eternal love of Radha and Krishna.
+            <Reveal delay={200}>
+              <p className="mt-6 font-sans text-base sm:text-lg leading-relaxed text-ivory/80 max-w-2xl font-light">
+                A sanctuary dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by the eternal love of Radha and Krishna.
               </p>
             </Reveal>
 
-            {/* Dynamic Interactive CTA Buttons */}
-            <Reveal delay={450}>
-              <div className="mt-10 flex flex-wrap items-center gap-5">
+            <Reveal delay={300}>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => handleOpenConsultation()}
-                  className="group relative inline-flex items-center gap-3.5 border border-gold bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.25em] text-shadow transition duration-300 hover:bg-gold-light hover:border-gold-light shadow-gold cursor-pointer overflow-hidden"
+                  className="inline-flex items-center gap-2.5 rounded-md bg-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-shadow transition duration-200 hover:bg-gold-light cursor-pointer shadow-md"
                 >
-                  <span className="relative z-10">Join Our Programs</span>
-                  <ChevronRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-gold-light via-gold to-saffron opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span>Join Our Programs</span>
+                  <ChevronRight className="h-4 w-4" />
                 </button>
 
                 <a
-                  href="#contact"
-                  className="group inline-flex items-center gap-3 border border-ivory/30 bg-shadow/40 backdrop-blur-sm px-8 py-4 text-xs font-semibold uppercase tracking-[0.25em] text-ivory/90 transition duration-300 hover:border-gold hover:text-gold-light hover:bg-shadow/70"
+                  href="#about"
+                  className="inline-flex items-center gap-2 rounded-md border border-ivory/30 bg-shadow/50 backdrop-blur-sm px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ivory transition duration-200 hover:border-gold hover:text-gold-light"
                 >
-                  <span>Contact Us</span>
-                  <ArrowUpRight className="h-4 w-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+                  <span>Explore Sanctuary</span>
+                  <ArrowUpRight className="h-4 w-4 opacity-70" />
                 </a>
               </div>
             </Reveal>
 
-            {/* Feature Stat Highlights */}
-            <Reveal delay={600}>
-              <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-6 border-t border-gold/25 pt-8 max-w-2xl">
+            <Reveal delay={400}>
+              <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 gap-6 border-t border-gold/20 pt-6 max-w-xl">
                 <div>
-                  <div className="font-display text-2xl sm:text-3xl text-gold-light font-medium">Daily</div>
-                  <div className="font-serif text-xs text-ivory/70 tracking-wider uppercase mt-1">Guided Meditation</div>
+                  <div className="font-display text-2xl text-gold-light font-medium">Daily</div>
+                  <div className="text-xs text-ivory/70 uppercase tracking-wider mt-0.5">Guided Meditation</div>
                 </div>
                 <div>
-                  <div className="font-display text-2xl sm:text-3xl text-gold-light font-medium">Holistic</div>
-                  <div className="font-serif text-xs text-ivory/70 tracking-wider uppercase mt-1">Healing & Gita</div>
+                  <div className="font-display text-2xl text-gold-light font-medium">Holistic</div>
+                  <div className="text-xs text-ivory/70 uppercase tracking-wider mt-0.5">Healing & Wisdom</div>
                 </div>
                 <div className="hidden sm:block">
-                  <div className="font-display text-2xl sm:text-3xl text-gold-light font-medium">Vrindavan</div>
-                  <div className="font-serif text-xs text-ivory/70 tracking-wider uppercase mt-1">Peaceful Sanctuary</div>
+                  <div className="font-display text-2xl text-gold-light font-medium">Vrindavan</div>
+                  <div className="text-xs text-ivory/70 uppercase tracking-wider mt-0.5">Sacred Atmosphere</div>
                 </div>
               </div>
             </Reveal>
           </div>
         </div>
-
-        {/* Bottom Banner Strap */}
-        <div className="absolute inset-x-0 bottom-0 border-t border-gold/20 bg-shadow/80 backdrop-blur py-3 text-center text-xs uppercase tracking-[0.3em] text-gold-light/70">
-          <span>Devotion · Meditation · Healing · Krishna Consciousness</span>
-        </div>
       </section>
 
-      {/* 2. ABOUT YUGALA RADHE KRISHNA TAPOVAN */}
-      <section id="about" className="relative py-24 bg-background overflow-hidden grain border-b border-gold/20">
+      {/* 2. ABOUT SECTION */}
+      <section id="about" className="py-24 bg-background border-b border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
               <Reveal>
-                <Eyebrow>Our Spiritual Heritage</Eyebrow>
-                <h2 className="mt-4 font-display text-3xl font-light text-foreground sm:text-4xl lg:text-5xl">
+                <EyebrowLeft>Spiritual Heritage</EyebrowLeft>
+                <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
                   About Yugala Radhe Krishna Tapovan
                 </h2>
-                <h3 className="mt-3 font-serif italic text-xl text-saffron font-medium">
+                <h3 className="mt-2 text-lg text-saffron font-medium">
                   A Sacred Space for Inner Transformation
                 </h3>
               </Reveal>
 
-              <Reveal delay={200}>
-                <div className="mt-8 space-y-6 font-serif text-lg leading-relaxed text-muted-foreground">
-                  <p className="border-l-2 border-gold/50 pl-4 py-1">
+              <Reveal delay={150}>
+                <div className="mt-6 space-y-4 font-sans text-base leading-relaxed text-muted-foreground">
+                  <p className="border-l-2 border-gold/60 pl-4 py-1 font-medium text-foreground/90">
                     Yugala Radhe Krishna Tapovan is a spiritual community where seekers experience devotion, meditation, healing, and self-discovery through the timeless wisdom of Radha and Krishna.
                   </p>
                   <p>
@@ -431,31 +385,31 @@ export function IndexPage() {
                 </div>
               </Reveal>
 
-              <Reveal delay={350}>
-                <div className="mt-10 grid grid-cols-2 gap-6 border-t border-gold/30 pt-6">
-                  <div className="group p-4 bg-card/60 border border-gold/20 hover:border-gold transition">
-                    <div className="font-display text-3xl text-crimson font-medium group-hover:scale-105 transition duration-300">100%</div>
-                    <div className="font-serif text-sm text-muted-foreground mt-1">Holistic Guidance</div>
+              <Reveal delay={250}>
+                <div className="mt-8 grid grid-cols-2 gap-4 border-t border-border pt-6">
+                  <div className="p-4 rounded-md bg-card border border-border">
+                    <div className="font-display text-2xl text-crimson font-semibold">100%</div>
+                    <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Holistic Guidance</div>
                   </div>
-                  <div className="group p-4 bg-card/60 border border-gold/20 hover:border-gold transition">
-                    <div className="font-display text-3xl text-crimson font-medium group-hover:scale-105 transition duration-300">Timeless</div>
-                    <div className="font-serif text-sm text-muted-foreground mt-1">Vedic Wisdom</div>
+                  <div className="p-4 rounded-md bg-card border border-border">
+                    <div className="font-display text-2xl text-crimson font-semibold">Timeless</div>
+                    <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Vedic Wisdom</div>
                   </div>
                 </div>
               </Reveal>
             </div>
 
             <div className="lg:col-span-6">
-              <Reveal delay={250}>
-                <div className="relative rounded-none overflow-hidden border border-gold/40 shadow-sacred group">
+              <Reveal delay={200}>
+                <div className="relative rounded-lg overflow-hidden border border-border shadow-md">
                   <img
                     src={tapovanImg}
-                    alt="Tapovan Spiritual Community Sanctuary"
-                    className="w-full h-[480px] object-cover transition-transform duration-700 group-hover:scale-110"
+                    alt="Tapovan Sanctuary Grounds"
+                    className="w-full h-[440px] object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-shadow/90 via-shadow/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-shadow/85 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 border-l-2 border-gold pl-4 text-ivory">
-                    <p className="font-serif italic text-lg">"Where every heart awakens to the lotus feet of Radha-Krishna."</p>
+                    <p className="font-display text-base font-light italic">"Where every heart awakens to the lotus feet of Radha-Krishna."</p>
                   </div>
                 </div>
               </Reveal>
@@ -465,48 +419,42 @@ export function IndexPage() {
       </section>
 
       {/* 3. VISION & MISSION */}
-      <section className="relative py-24 bg-shadow text-ivory overflow-hidden">
-        <SacredParticles particleCount={25} />
-
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <img src={fluteImg} alt="Spiritual flute motif" className="w-full h-full object-cover" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="py-20 bg-shadow text-ivory">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
               <Eyebrow>Guiding Philosophy</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-ivory sm:text-4xl">
+              <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
                 Vision & Mission
               </h2>
-              <div className="gold-line mt-4 mx-auto w-32" />
+              <div className="gold-line mt-4 mx-auto w-24" />
             </div>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Reveal delay={150}>
-              <div className="h-full border border-gold/30 bg-shadow/80 p-8 lg:p-10 backdrop-blur-md relative group hover:border-gold transition duration-500 hover:-translate-y-1 shadow-lg">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3.5 bg-crimson/40 border border-gold/40 text-gold rounded-full group-hover:scale-110 group-hover:bg-crimson transition duration-300">
-                    <Sun className="h-6 w-6" />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Reveal delay={100}>
+              <div className="h-full rounded-lg border border-gold/30 bg-shadow/90 p-8 backdrop-blur-sm">
+                <div className="flex items-center gap-3.5 mb-4">
+                  <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-full">
+                    <Sun className="h-5 w-5" />
                   </div>
-                  <h3 className="font-display text-2xl text-gold-light">Our Vision</h3>
+                  <h3 className="font-display text-xl text-gold-light font-medium">Our Vision</h3>
                 </div>
-                <p className="font-serif text-xl leading-relaxed text-ivory/90 italic">
+                <p className="font-sans text-base leading-relaxed text-ivory/85">
                   "To inspire humanity to live with devotion, compassion, inner peace, and Krishna Consciousness."
                 </p>
               </div>
             </Reveal>
 
-            <Reveal delay={300}>
-              <div className="h-full border border-gold/30 bg-shadow/80 p-8 lg:p-10 backdrop-blur-md relative group hover:border-gold transition duration-500 hover:-translate-y-1 shadow-lg">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3.5 bg-crimson/40 border border-gold/40 text-gold rounded-full group-hover:scale-110 group-hover:bg-crimson transition duration-300">
-                    <Heart className="h-6 w-6" />
+            <Reveal delay={200}>
+              <div className="h-full rounded-lg border border-gold/30 bg-shadow/90 p-8 backdrop-blur-sm">
+                <div className="flex items-center gap-3.5 mb-4">
+                  <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-full">
+                    <Heart className="h-5 w-5" />
                   </div>
-                  <h3 className="font-display text-2xl text-gold-light">Our Mission</h3>
+                  <h3 className="font-display text-xl text-gold-light font-medium">Our Mission</h3>
                 </div>
-                <p className="font-serif text-xl leading-relaxed text-ivory/90 italic">
+                <p className="font-sans text-base leading-relaxed text-ivory/85">
                   "To create a sacred environment where individuals can heal, meditate, learn, serve, and transform through the boundless love of Radha and Krishna."
                 </p>
               </div>
@@ -515,22 +463,22 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 4. WHAT WE OFFER */}
-      <section id="academy" className="relative py-24 bg-card grain border-b border-gold/20">
+      {/* 4. OFFERINGS */}
+      <section id="offerings" className="py-24 bg-background border-b border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Sacred Offerings</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-foreground sm:text-4xl lg:text-5xl">
+              <Eyebrow>Sacred Pathways</Eyebrow>
+              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
                 What We Offer
               </h2>
-              <p className="mt-3 font-serif text-lg text-muted-foreground">
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
                 Comprehensive pathways for spiritual growth, learning, and self-realization.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "Spiritual Retreats",
@@ -565,27 +513,26 @@ export function IndexPage() {
             ].map((offer, index) => {
               const IconComp = offer.icon;
               return (
-                <Reveal key={offer.title} delay={index * 100}>
-                  <div className="h-full border border-gold/30 bg-background/90 p-8 transition-all duration-500 hover:-translate-y-2 hover:border-gold hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold via-saffron to-crimson opacity-0 group-hover:opacity-100 transition duration-300" />
+                <Reveal key={offer.title} delay={index * 80}>
+                  <div className="h-full rounded-lg border border-border bg-card p-6 flex flex-col justify-between hover:border-gold/60 transition duration-300 shadow-sm">
                     <div>
-                      <div className="h-12 w-12 rounded-none border border-gold/40 bg-muted/60 flex items-center justify-center text-crimson group-hover:bg-crimson group-hover:text-ivory group-hover:scale-110 transition duration-300 mb-6">
-                        <IconComp className="h-6 w-6" />
+                      <div className="h-11 w-11 rounded-md border border-gold/30 bg-muted/50 flex items-center justify-center text-crimson mb-5">
+                        <IconComp className="h-5 w-5" />
                       </div>
-                      <h3 className="font-display text-2xl font-normal text-foreground group-hover:text-crimson transition">
+                      <h3 className="font-display text-xl font-medium text-foreground">
                         {offer.title}
                       </h3>
-                      <p className="mt-3 font-serif text-base text-muted-foreground leading-relaxed">
+                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                         {offer.desc}
                       </p>
                     </div>
 
                     <button
                       onClick={() => handleOpenConsultation(offer.title)}
-                      className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold-antique font-semibold hover:text-crimson transition cursor-pointer"
+                      className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-crimson hover:text-gold-antique transition cursor-pointer"
                     >
                       <span>Explore Offering</span>
-                      <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition duration-300" />
+                      <ArrowUpRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
                 </Reveal>
@@ -596,24 +543,22 @@ export function IndexPage() {
       </section>
 
       {/* 5. WHY CHOOSE US */}
-      <section className="relative py-24 bg-shadow text-ivory overflow-hidden">
-        <SacredParticles particleCount={25} />
-
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 relative z-10">
+      <section className="py-24 bg-shadow text-ivory">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <Reveal>
-                <Eyebrow>Sanctuary Distinctives</Eyebrow>
-                <h2 className="mt-4 font-display text-3xl font-light text-ivory sm:text-4xl lg:text-5xl">
+                <EyebrowLeft>Sanctuary Distinctives</EyebrowLeft>
+                <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
                   Why Choose Us
                 </h2>
-                <p className="mt-4 font-serif text-lg text-ivory/80 leading-relaxed">
+                <p className="mt-4 text-sm sm:text-base text-ivory/80 leading-relaxed">
                   Discover a nurtured environment designed to elevate your mind, soothe your soul, and anchor your spirit in divine love.
                 </p>
                 <div className="mt-8">
                   <button
                     onClick={() => handleOpenConsultation()}
-                    className="border border-gold bg-gold px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-shadow hover:bg-gold-light transition shadow-gold cursor-pointer"
+                    className="rounded-md bg-gold px-7 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-shadow hover:bg-gold-light transition cursor-pointer"
                   >
                     Start Your Path Today
                   </button>
@@ -622,7 +567,7 @@ export function IndexPage() {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
                   "Rooted in Krishna Consciousness",
                   "Experienced Spiritual Guidance",
@@ -632,25 +577,23 @@ export function IndexPage() {
                   "Supportive Spiritual Community",
                   "Peaceful Learning Environment",
                 ].map((item, idx) => (
-                  <Reveal key={item} delay={idx * 80}>
+                  <Reveal key={item} delay={idx * 60}>
                     <div
                       onMouseEnter={() => setActiveWhyUsIdx(idx)}
-                      className={`flex items-center gap-4 border px-6 py-4 transition-all duration-300 cursor-pointer ${
+                      className={`flex items-center gap-3.5 rounded-lg border px-5 py-3.5 transition-all duration-200 cursor-pointer ${
                         activeWhyUsIdx === idx
-                          ? "border-gold bg-shadow/95 shadow-gold translate-x-2"
-                          : "border-gold/20 bg-shadow/60 hover:border-gold/50"
+                          ? "border-gold bg-shadow/95 text-ivory shadow-sm"
+                          : "border-gold/20 bg-shadow/60 text-ivory/80 hover:border-gold/40"
                       }`}
                     >
                       <div
-                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition duration-300 ${
-                          activeWhyUsIdx === idx
-                            ? "bg-gold text-shadow border-gold"
-                            : "bg-crimson/50 text-gold border-gold/40"
+                        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition ${
+                          activeWhyUsIdx === idx ? "bg-gold text-shadow" : "bg-crimson/50 text-gold"
                         }`}
                       >
-                        <Check className="h-4 w-4" />
+                        <Check className="h-3.5 w-3.5" />
                       </div>
-                      <span className="font-serif text-lg text-ivory/90 font-medium">
+                      <span className="font-sans text-sm font-medium">
                         {item}
                       </span>
                     </div>
@@ -662,22 +605,22 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 6. OUR CORE PROGRAMS */}
-      <section id="programs" className="relative py-24 bg-background grain border-b border-gold/20">
+      {/* 6. CORE PROGRAMS */}
+      <section id="programs" className="py-24 bg-background border-b border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
               <Eyebrow>Featured Offerings</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-foreground sm:text-4xl lg:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
                 Our Core Programs
               </h2>
-              <p className="mt-3 font-serif text-lg text-muted-foreground">
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
                 Deepen your practice with structured programs designed for seekers of all stages.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "7-Day Inner Transformation Retreat",
@@ -710,26 +653,26 @@ export function IndexPage() {
                 tag: "Holistic",
               },
             ].map((program, idx) => (
-              <Reveal key={program.title} delay={idx * 100}>
-                <div className="h-full border border-gold/30 bg-card p-8 flex flex-col justify-between hover:border-gold transition duration-500 shadow-sm hover:shadow-lg group">
+              <Reveal key={program.title} delay={idx * 80}>
+                <div className="h-full rounded-lg border border-border bg-card p-6 flex flex-col justify-between hover:border-gold/60 transition duration-300 shadow-sm">
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-crimson bg-crimson/10 px-3 py-1 border border-crimson/20">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-crimson bg-crimson/10 px-2.5 py-0.5 rounded border border-crimson/20">
                         {program.tag}
                       </span>
-                      <Calendar className="h-4 w-4 text-gold-antique group-hover:scale-110 transition" />
+                      <Calendar className="h-4 w-4 text-gold-antique" />
                     </div>
-                    <h3 className="font-display text-2xl text-foreground font-normal group-hover:text-crimson transition">
+                    <h3 className="font-display text-xl font-medium text-foreground">
                       {program.title}
                     </h3>
-                    <p className="mt-3 font-serif text-base text-muted-foreground leading-relaxed">
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                       {program.desc}
                     </p>
                   </div>
 
                   <button
                     onClick={() => handleOpenConsultation(program.title)}
-                    className="mt-8 w-full border border-gold/60 py-3 text-xs uppercase tracking-[0.25em] text-crimson font-semibold hover:bg-crimson hover:text-ivory hover:border-crimson transition duration-300 cursor-pointer"
+                    className="mt-6 w-full rounded-md border border-gold/50 py-2.5 text-xs font-semibold uppercase tracking-wider text-crimson hover:bg-crimson hover:text-ivory hover:border-crimson transition duration-200 cursor-pointer"
                   >
                     Enroll / Inquire
                   </button>
@@ -740,26 +683,24 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 7. OUR COMMUNITY */}
-      <section className="relative py-24 bg-shadow text-ivory overflow-hidden">
-        <SacredParticles particleCount={30} />
-
+      {/* 7. COMMUNITY / SANGHA */}
+      <section className="py-20 bg-shadow text-ivory relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={rasaImg} alt="Community Rasa Leela Celebration" className="h-full w-full object-cover opacity-20 anim-slow-zoom" />
-          <div className="absolute inset-0 bg-gradient-to-r from-shadow via-shadow/90 to-shadow/70" />
+          <img src={rasaImg} alt="Community Celebration" className="h-full w-full object-cover opacity-15" />
+          <div className="absolute inset-0 bg-shadow/90" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="max-w-3xl">
+          <div className="max-w-2xl">
             <Reveal>
-              <Eyebrow>Join the Sangha</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-ivory sm:text-5xl">
+              <EyebrowLeft>Join the Sangha</EyebrowLeft>
+              <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
                 Become Part of the Yugala Family
               </h2>
             </Reveal>
 
-            <Reveal delay={200}>
-              <div className="mt-8 space-y-6 font-serif text-xl leading-relaxed text-ivory/90">
+            <Reveal delay={150}>
+              <div className="mt-4 space-y-3 text-sm sm:text-base text-ivory/85 leading-relaxed">
                 <p>
                   Join a growing community of spiritual seekers committed to inner peace, devotion, learning, and selfless service.
                 </p>
@@ -769,11 +710,11 @@ export function IndexPage() {
               </div>
             </Reveal>
 
-            <Reveal delay={350}>
-              <div className="mt-10 flex flex-wrap gap-4">
+            <Reveal delay={250}>
+              <div className="mt-8">
                 <button
                   onClick={() => handleOpenConsultation("Community Membership")}
-                  className="bg-gold hover:bg-gold-light text-shadow font-semibold px-8 py-4 text-xs uppercase tracking-[0.25em] transition shadow-gold cursor-pointer"
+                  className="rounded-md bg-gold px-7 py-3 text-xs uppercase tracking-[0.2em] font-semibold text-shadow hover:bg-gold-light transition cursor-pointer"
                 >
                   Join Community Membership
                 </button>
@@ -783,44 +724,43 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 8. GALLERY (Interactive Lightbox Viewer) */}
-      <section id="gallery" className="relative py-24 bg-background grain border-b border-gold/20">
+      {/* 8. GALLERY */}
+      <section id="gallery" className="py-24 bg-background border-b border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
               <Eyebrow>Sanctuary Moments</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-foreground sm:text-4xl lg:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
                 Gallery
               </h2>
-              <p className="mt-3 font-serif text-lg text-muted-foreground">
-                Visual glimpses of devotion, meditation, and sacred spaces at Tapovan. Click any image to view in full screen.
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                Visual glimpses of devotion, meditation, and sacred spaces at Tapovan. Click any image to preview.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryItems.map((item, idx) => (
-              <Reveal key={item.title} delay={idx * 100}>
+              <Reveal key={item.title} delay={idx * 80}>
                 <div
                   onClick={() => setGalleryModalIdx(idx)}
-                  className="group relative overflow-hidden rounded-none border border-gold/30 bg-card shadow-sm hover:border-gold transition duration-500 cursor-pointer"
+                  className="group relative overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-gold/60 transition duration-300 cursor-pointer"
                 >
-                  <div className="h-64 overflow-hidden relative">
+                  <div className="h-60 overflow-hidden relative">
                     <img
                       src={item.img}
                       alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-shadow/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                      <div className="p-3 rounded-full bg-gold/80 text-shadow border border-gold">
-                        <Maximize2 className="h-5 w-5" />
+                    <div className="absolute inset-0 bg-shadow/40 opacity-0 group-hover:opacity-100 transition duration-200 flex items-center justify-center">
+                      <div className="p-2.5 rounded-full bg-gold text-shadow">
+                        <Maximize2 className="h-4 w-4" />
                       </div>
                     </div>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-shadow/90 via-shadow/20 to-transparent opacity-80 group-hover:opacity-90 transition duration-300 pointer-events-none" />
-                  <div className="absolute bottom-4 left-5 right-5 text-ivory">
-                    <div className="font-display text-xl text-gold-light font-medium">{item.title}</div>
-                    <div className="font-serif text-xs text-ivory/80 italic">{item.caption}</div>
+                  <div className="p-4 border-t border-border">
+                    <div className="font-display text-base font-medium text-foreground">{item.title}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{item.caption}</div>
                   </div>
                 </div>
               </Reveal>
@@ -829,65 +769,64 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 9. TESTIMONIALS (Interactive Slider & Carousel) */}
-      <section className="relative py-24 bg-card grain border-b border-gold/20">
+      {/* 9. TESTIMONIALS */}
+      <section className="py-24 bg-card border-b border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Seeker Experiences</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-foreground sm:text-4xl lg:text-5xl">
+              <Eyebrow>Seeker Reflections</Eyebrow>
+              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
                 Testimonials
               </h2>
-              <p className="mt-3 font-serif text-lg text-muted-foreground">
-                Heartfelt reflections from participants whose lives were transformed at Tapovan.
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                Reflections from participants whose lives were transformed at Tapovan.
               </p>
             </div>
           </Reveal>
 
-          {/* Interactive Testimonial Featured Focus */}
-          <div className="mt-14 max-w-3xl mx-auto">
-            <Reveal delay={200}>
-              <div className="border border-gold/40 bg-background/95 p-8 sm:p-12 shadow-md relative">
-                <Quote className="h-10 w-10 text-gold/40 mb-4" />
-                <div className="flex items-center gap-1 text-gold mb-4">
+          <div className="mt-12 max-w-3xl mx-auto">
+            <Reveal delay={150}>
+              <div className="rounded-xl border border-border bg-background p-8 sm:p-10 shadow-sm relative">
+                <Quote className="h-8 w-8 text-gold-antique/30 mb-3" />
+                <div className="flex items-center gap-1 text-gold mb-3">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+                    <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
                   ))}
                 </div>
-                <p className="font-serif text-xl sm:text-2xl italic text-foreground leading-relaxed">
+                <p className="font-sans text-base sm:text-lg text-foreground leading-relaxed italic">
                   "{testimonials[activeTestimonialIdx].quote}"
                 </p>
 
-                <div className="mt-8 pt-6 border-t border-gold/30 flex items-center justify-between">
+                <div className="mt-6 pt-5 border-t border-border flex items-center justify-between">
                   <div>
-                    <div className="font-display text-lg font-semibold text-crimson">
+                    <div className="font-display text-base font-medium text-crimson">
                       {testimonials[activeTestimonialIdx].name}
                     </div>
-                    <div className="font-serif text-sm text-muted-foreground">
+                    <div className="text-xs text-muted-foreground">
                       {testimonials[activeTestimonialIdx].role}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <button
                       onClick={() =>
                         setActiveTestimonialIdx(
                           (activeTestimonialIdx - 1 + testimonials.length) % testimonials.length
                         )
                       }
-                      className="p-2 border border-gold/40 text-gold hover:bg-gold hover:text-shadow transition cursor-pointer"
+                      className="p-2 rounded-md border border-border text-foreground hover:bg-muted transition cursor-pointer"
                       aria-label="Previous testimonial"
                     >
-                      <ChevronLeft className="h-5 w-5" />
+                      <ChevronLeft className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() =>
                         setActiveTestimonialIdx((activeTestimonialIdx + 1) % testimonials.length)
                       }
-                      className="p-2 border border-gold/40 text-gold hover:bg-gold hover:text-shadow transition cursor-pointer"
+                      className="p-2 rounded-md border border-border text-foreground hover:bg-muted transition cursor-pointer"
                       aria-label="Next testimonial"
                     >
-                      <ChevronRight className="h-5 w-5" />
+                      <ChevronRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -895,13 +834,13 @@ export function IndexPage() {
             </Reveal>
 
             {/* Indicator Dots */}
-            <div className="flex items-center justify-center gap-3 mt-6">
+            <div className="flex items-center justify-center gap-2 mt-5">
               {testimonials.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveTestimonialIdx(idx)}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    activeTestimonialIdx === idx ? "w-8 bg-crimson" : "w-2.5 bg-gold/40 hover:bg-gold"
+                  className={`h-2 rounded-full transition-all duration-200 ${
+                    activeTestimonialIdx === idx ? "w-6 bg-crimson" : "w-2 bg-border hover:bg-gold-antique"
                   }`}
                   aria-label={`Go to testimonial ${idx + 1}`}
                 />
@@ -912,77 +851,74 @@ export function IndexPage() {
       </section>
 
       {/* 10. CONTACT SECTION */}
-      <section id="contact" className="relative py-24 bg-shadow text-ivory overflow-hidden">
-        <SacredParticles particleCount={30} />
-
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 relative z-10">
+      <section id="contact" className="py-24 bg-shadow text-ivory">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
-            <div className="text-center max-w-3xl mx-auto">
+            <div className="text-center max-w-2xl mx-auto">
               <Eyebrow>Connect With Us</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-light text-ivory sm:text-5xl">
-                Begin Your Spiritual Journey Today
+              <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
+                Begin Your Journey Today
               </h2>
-              <p className="mt-4 font-serif text-xl text-ivory/85">
+              <p className="mt-2 text-sm sm:text-base text-ivory/80">
                 Whether you're seeking inner peace, healing, or spiritual growth, we're here to guide you.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Contact Details & Info */}
-            <div className="lg:col-span-5 space-y-8">
+          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-5 space-y-6">
               <Reveal delay={150}>
-                <div className="border border-gold/30 bg-shadow/70 p-8 backdrop-blur space-y-6">
-                  <h3 className="font-display text-2xl text-gold-light mb-6">Contact Details</h3>
+                <div className="rounded-lg border border-gold/30 bg-shadow/80 p-7 backdrop-blur-sm space-y-5">
+                  <h3 className="font-display text-xl text-gold-light font-medium mb-4">Contact Details</h3>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-none group-hover:bg-crimson group-hover:text-ivory transition duration-300">
-                      <Phone className="h-5 w-5" />
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2.5 bg-crimson/30 border border-gold/30 text-gold rounded-md">
+                      <Phone className="h-4 w-4" />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-gold-light/80 font-semibold">Phone</div>
-                      <div className="font-serif text-lg text-ivory mt-1">+91 98765 43210 / +91 87654 32109</div>
+                      <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold">Phone</div>
+                      <div className="text-sm text-ivory mt-0.5">+91 98765 43210 / +91 87654 32109</div>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-none group-hover:bg-crimson group-hover:text-ivory transition duration-300">
-                      <Mail className="h-5 w-5" />
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2.5 bg-crimson/30 border border-gold/30 text-gold rounded-md">
+                      <Mail className="h-4 w-4" />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-gold-light/80 font-semibold">Email</div>
-                      <div className="font-serif text-lg text-ivory mt-1">info@yugalatapovan.org</div>
+                      <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold">Email</div>
+                      <div className="text-sm text-ivory mt-0.5">info@yugalatapovan.org</div>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-none group-hover:bg-crimson group-hover:text-ivory transition duration-300">
-                      <MapPin className="h-5 w-5" />
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2.5 bg-crimson/30 border border-gold/30 text-gold rounded-md">
+                      <MapPin className="h-4 w-4" />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-gold-light/80 font-semibold">Address</div>
-                      <div className="font-serif text-lg text-ivory mt-1">
+                      <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold">Address</div>
+                      <div className="text-sm text-ivory mt-0.5">
                         Yugala Radhe Krishna Tapovan Marg, Sacred Vrindavan Sanctuary Valley, India
                       </div>
                     </div>
                   </div>
 
                   <div className="pt-4 border-t border-gold/20">
-                    <div className="text-xs uppercase tracking-wider text-gold-light/80 font-semibold mb-3">
+                    <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold mb-3">
                       Follow Our Sacred Journey
                     </div>
-                    <div className="flex items-center gap-4 text-gold">
-                      <a href="#" className="p-2.5 border border-gold/30 hover:bg-gold hover:text-shadow transition duration-300" aria-label="Instagram">
-                        <Instagram className="h-5 w-5" />
+                    <div className="flex items-center gap-3 text-gold">
+                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="Instagram">
+                        <Instagram className="h-4 w-4" />
                       </a>
-                      <a href="#" className="p-2.5 border border-gold/30 hover:bg-gold hover:text-shadow transition duration-300" aria-label="YouTube">
-                        <Youtube className="h-5 w-5" />
+                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="YouTube">
+                        <Youtube className="h-4 w-4" />
                       </a>
-                      <a href="#" className="p-2.5 border border-gold/30 hover:bg-gold hover:text-shadow transition duration-300" aria-label="Facebook">
-                        <Facebook className="h-5 w-5" />
+                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="Facebook">
+                        <Facebook className="h-4 w-4" />
                       </a>
-                      <a href="#" className="p-2.5 border border-gold/30 hover:bg-gold hover:text-shadow transition duration-300" aria-label="WhatsApp">
-                        <MessageCircle className="h-5 w-5" />
+                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="WhatsApp">
+                        <MessageCircle className="h-4 w-4" />
                       </a>
                     </div>
                   </div>
@@ -990,17 +926,15 @@ export function IndexPage() {
               </Reveal>
             </div>
 
-            {/* Google Map & Direct CTA Card */}
-            <div className="lg:col-span-7 space-y-8">
-              <Reveal delay={250}>
-                {/* Interactive Map Embed */}
-                <div className="border border-gold/30 overflow-hidden h-[300px] relative shadow-lg">
+            <div className="lg:col-span-7 space-y-6">
+              <Reveal delay={200}>
+                <div className="rounded-lg border border-gold/30 overflow-hidden h-[260px] relative shadow-md">
                   <iframe
                     title="Yugala Tapovan Location Map"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14144.595089332152!2d77.69344445!3d27.57962255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736fcb27561f71%3A0xe9fb56f8f5333f28!2sVrindavan%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
-                    style={{ border: 0, filter: "brightness(0.85) contrast(1.1)" }}
+                    style={{ border: 0 }}
                     allowFullScreen={false}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -1008,15 +942,15 @@ export function IndexPage() {
                 </div>
               </Reveal>
 
-              <Reveal delay={350}>
-                <div className="border border-gold/40 bg-gradient-to-br from-crimson/40 via-shadow to-shadow p-8 text-center shadow-gold">
-                  <h3 className="font-display text-2xl text-ivory mb-2">Book a Consultation / Join a Program</h3>
-                  <p className="font-serif text-ivory/80 mb-6">
+              <Reveal delay={250}>
+                <div className="rounded-lg border border-gold/40 bg-gradient-to-r from-crimson/30 to-shadow/90 p-7 text-center">
+                  <h3 className="font-display text-xl text-ivory mb-1 font-medium">Book a Consultation / Join a Program</h3>
+                  <p className="text-xs sm:text-sm text-ivory/80 mb-5">
                     Connect directly with our spiritual guidance facilitators to reserve your seat or ask any questions.
                   </p>
                   <button
                     onClick={() => handleOpenConsultation()}
-                    className="w-full bg-gold hover:bg-gold-light text-shadow font-semibold py-4 px-8 text-xs uppercase tracking-[0.25em] transition shadow-gold cursor-pointer"
+                    className="w-full rounded-md bg-gold hover:bg-gold-light text-shadow font-semibold py-3 px-6 text-xs uppercase tracking-[0.2em] transition cursor-pointer"
                   >
                     Book Consultation / Join Program
                   </button>
@@ -1028,47 +962,41 @@ export function IndexPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-gold/30 bg-shadow/95 text-ivory py-16">
+      <footer className="border-t border-gold/25 bg-shadow text-ivory py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-5 space-y-4">
-              <div className="flex items-center gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-5 space-y-3">
+              <div className="flex items-center gap-3">
                 <img
                   src="/Logo.jpeg"
                   alt="Yugala Radhe Krishna Tapovan Logo"
-                  className="h-12 w-12 rounded-full object-cover border border-gold/60 shadow-gold"
+                  className="h-10 w-10 rounded-full object-cover border border-gold/60"
                 />
-                <div className="font-display text-lg tracking-[0.2em] text-gold-light">
+                <div className="font-display text-base tracking-[0.15em] text-gold-light font-medium">
                   YUGALA RADHE KRISHNA TAPOVAN
                 </div>
               </div>
-              <p className="font-serif text-sm text-ivory/70 max-w-sm leading-relaxed">
+              <p className="text-xs text-ivory/70 max-w-sm leading-relaxed">
                 A sacred space dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by the eternal love of Radha and Krishna.
               </p>
             </div>
 
-            {/* Quick Links */}
-            <div className="lg:col-span-3 space-y-3">
-              <div className="text-xs uppercase tracking-[0.25em] text-gold font-semibold mb-4">Quick Links</div>
-              <ul className="space-y-2 text-sm font-serif text-ivory/80">
+            <div className="lg:col-span-3 space-y-2">
+              <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-3">Quick Links</div>
+              <ul className="space-y-1.5 text-xs text-ivory/80">
                 <li>
                   <a href="#about" className="hover:text-gold transition">
                     About
                   </a>
                 </li>
                 <li>
+                  <a href="#offerings" className="hover:text-gold transition">
+                    Offerings
+                  </a>
+                </li>
+                <li>
                   <a href="#programs" className="hover:text-gold transition">
-                    Programs
-                  </a>
-                </li>
-                <li>
-                  <a href="#academy" className="hover:text-gold transition">
-                    Academy
-                  </a>
-                </li>
-                <li>
-                  <a href="#academy" className="hover:text-gold transition">
-                    Workshops
+                    Core Programs
                   </a>
                 </li>
                 <li>
@@ -1079,10 +1007,9 @@ export function IndexPage() {
               </ul>
             </div>
 
-            {/* Legal */}
-            <div className="lg:col-span-4 space-y-3">
-              <div className="text-xs uppercase tracking-[0.25em] text-gold font-semibold mb-4">Legal & Information</div>
-              <ul className="space-y-2 text-sm font-serif text-ivory/80">
+            <div className="lg:col-span-4 space-y-2">
+              <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-3">Legal & Information</div>
+              <ul className="space-y-1.5 text-xs text-ivory/80">
                 <li>
                   <button
                     onClick={() => setLegalType("privacy")}
@@ -1109,20 +1036,20 @@ export function IndexPage() {
                 </li>
               </ul>
 
-              <div className="pt-4 flex items-center gap-4 text-gold">
-                <a href="#" aria-label="Instagram" className="hover:text-ivory transition"><Instagram className="h-5 w-5" /></a>
-                <a href="#" aria-label="YouTube" className="hover:text-ivory transition"><Youtube className="h-5 w-5" /></a>
-                <a href="#" aria-label="Facebook" className="hover:text-ivory transition"><Facebook className="h-5 w-5" /></a>
-                <a href="#" aria-label="WhatsApp" className="hover:text-ivory transition"><MessageCircle className="h-5 w-5" /></a>
+              <div className="pt-3 flex items-center gap-3 text-gold">
+                <a href="#" aria-label="Instagram" className="hover:text-ivory transition"><Instagram className="h-4 w-4" /></a>
+                <a href="#" aria-label="YouTube" className="hover:text-ivory transition"><Youtube className="h-4 w-4" /></a>
+                <a href="#" aria-label="Facebook" className="hover:text-ivory transition"><Facebook className="h-4 w-4" /></a>
+                <a href="#" aria-label="WhatsApp" className="hover:text-ivory transition"><MessageCircle className="h-4 w-4" /></a>
               </div>
             </div>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-gold/20 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 font-serif gap-4">
+          <div className="mt-10 pt-6 border-t border-gold/20 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 gap-3">
             <div>
               © {new Date().getFullYear()} Yugala Radhe Krishna Tapovan. All rights reserved.
             </div>
-            <div className="text-gold-light/60 italic">
+            <div className="text-gold-light/60 font-medium">
               ॥ Radhe Radhe · Hare Krishna ॥
             </div>
           </div>
