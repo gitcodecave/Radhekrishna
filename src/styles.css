@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Cinzel", serif;
-  --font-serif: "Cinzel", serif;
+  --font-display: "Marcellus", serif;
+  --font-serif: "Marcellus", serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
 
   --color-background: var(--background);
