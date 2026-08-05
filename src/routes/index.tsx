@@ -620,62 +620,114 @@ export function IndexPage() {
             </div>
           </Reveal>
 
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 title: "7-Day Inner Transformation Retreat",
                 desc: "An immersive week of deep sadhana, guided meditation, silent reflection, and divine Krishna Consciousness.",
                 tag: "Retreat",
+                duration: "7 Days / 6 Nights",
+                img: tapovanImg,
+                features: ["Guided Silence & Sadhana", "Personal Meditation Mentor", "Organic Satvik Meals"],
               },
               {
                 title: "Weekend Spiritual Retreat",
                 desc: "Recharge your spirit over Saturday & Sunday with sacred kirtan, yoga, pranayama, and healing circles.",
                 tag: "Weekend",
+                duration: "Sat & Sun (2 Days)",
+                img: heroImg,
+                features: ["Sacred Kirtan & Chanting", "Pranayama & Hatha Yoga", "Spiritual Sangha Circles"],
               },
               {
                 title: "Kids Gurukulam",
                 desc: "Nurturing young minds with Vedic values, storytelling, mindfulness, Bhagavad Gita slokas, and creative arts.",
                 tag: "Youth",
+                duration: "Weekend Sessions",
+                img: galleryTemple,
+                features: ["Vedic Storytelling & Slokas", "Mindfulness for Children", "Creative Arts & Drama"],
               },
               {
                 title: "Healing & Meditation Programs",
                 desc: "Emotional release, sound healing, mantra chanting, and restorative energy alignment for deep inner peace.",
                 tag: "Wellness",
+                duration: "Flexible / Guided",
+                img: galleryHealing,
+                features: ["Vibrational Sound Therapy", "Chakra Energy Alignment", "Stress & Anxiety Release"],
               },
               {
                 title: "Bhagavad Gita Learning",
                 desc: "Systematic verse-by-verse study revealing practical life wisdom and devotion for modern daily living.",
                 tag: "Academy",
+                duration: "12-Week Certificate",
+                img: diyaImg,
+                features: ["Verse-by-Verse Discourse", "Practical Life Wisdom", "Interactive Q&A Sessions"],
               },
               {
                 title: "Yoga & Pranayama",
                 desc: "Harmonize body, breath, and spirit through traditional hatha yoga and breath expansion techniques.",
                 tag: "Holistic",
+                duration: "Daily Morning Batches",
+                img: galleryMeditation,
+                features: ["Traditional Hatha Yoga", "Deep Breathwork Mastery", "Mindful Body Movement"],
               },
             ].map((program, idx) => (
               <Reveal key={program.title} delay={idx * 80}>
-                <div className="h-full rounded-lg border border-border bg-card p-6 flex flex-col justify-between hover:border-gold/60 transition duration-300 shadow-sm">
+                <div className="group h-full rounded-xl border border-border bg-card overflow-hidden shadow-sm hover:border-gold/60 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-crimson bg-crimson/10 px-2.5 py-0.5 rounded border border-crimson/20">
-                        {program.tag}
-                      </span>
-                      <Calendar className="h-4 w-4 text-gold-antique" />
+                    {/* Program Image Banner with Overlays */}
+                    <div className="relative h-48 w-full overflow-hidden bg-shadow">
+                      <img
+                        src={program.img}
+                        alt={program.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-shadow via-shadow/40 to-transparent" />
+                      
+                      {/* Category Badge */}
+                      <div className="absolute top-3 left-3">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gold-light bg-shadow/80 backdrop-blur-md px-3 py-1 rounded-md border border-gold/40">
+                          {program.tag}
+                        </span>
+                      </div>
+
+                      {/* Duration Tag */}
+                      <div className="absolute bottom-3 right-3 flex items-center gap-1.5 text-xs text-ivory/90 bg-shadow/80 backdrop-blur-sm px-2.5 py-1 rounded-md border border-ivory/20">
+                        <Calendar className="h-3 w-3 text-gold" />
+                        <span>{program.duration}</span>
+                      </div>
                     </div>
-                    <h3 className="font-display text-xl font-medium text-foreground">
-                      {program.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      {program.desc}
-                    </p>
+
+                    {/* Program Main Content */}
+                    <div className="p-6">
+                      <h3 className="font-display text-xl font-medium text-foreground group-hover:text-crimson transition duration-200">
+                        {program.title}
+                      </h3>
+                      <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
+                        {program.desc}
+                      </p>
+
+                      {/* Program Feature Checklist */}
+                      <div className="mt-5 border-t border-border pt-4 space-y-2">
+                        {program.features.map((feat) => (
+                          <div key={feat} className="flex items-center gap-2 text-xs text-foreground/80">
+                            <Check className="h-3.5 w-3.5 text-gold shrink-0" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
-                  <button
-                    onClick={() => handleOpenConsultation(program.title)}
-                    className="mt-6 w-full rounded-md border border-gold/50 py-2.5 text-xs font-semibold uppercase tracking-wider text-crimson hover:bg-crimson hover:text-ivory hover:border-crimson transition duration-200 cursor-pointer"
-                  >
-                    Enroll / Inquire
-                  </button>
+                  {/* Card Bottom CTA */}
+                  <div className="px-6 pb-6 pt-2">
+                    <button
+                      onClick={() => handleOpenConsultation(program.title)}
+                      className="w-full rounded-md border border-gold/60 bg-gold/10 py-3 text-xs font-semibold uppercase tracking-wider text-crimson hover:bg-crimson hover:text-ivory hover:border-crimson transition duration-200 cursor-pointer flex items-center justify-center gap-2 group/btn"
+                    >
+                      <span>Enroll / Inquire</span>
+                      <ChevronRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                    </button>
+                  </div>
                 </div>
               </Reveal>
             ))}
