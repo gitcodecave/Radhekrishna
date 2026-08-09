@@ -40,23 +40,31 @@ import {
   ShieldCheck,
   Flower2,
   Maximize2,
+  ShoppingBag,
+  Gift,
+  Flame,
+  HandHeart,
+  Crown,
+  Clock,
+  Home,
+  Send,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: IndexPage,
   head: () => ({
     meta: [
-      { title: "Yugala Radhe Krishna Tapovan — Spiritual Sanctuary & Inner Transformation" },
+      { title: "Yugala Radhe Krishna Tapovan — Spiritual Sanctuary & Devotional Home" },
       {
         name: "description",
         content:
-          "Experience Divine Love. Awaken Your Inner Self. A spiritual sanctuary dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by Radha and Krishna.",
+          "Welcome to Yugala Radhe Krishna Tapovan. A sacred home where every soul is invited to experience the eternal love of Sri Radha and Sri Krishna through devotion, meditation, seva, and joyful living.",
       },
     ],
   }),
 });
 
-/* -------- Standardized Reveal on Scroll Component -------- */
+/* -------- Reveal on Scroll Component -------- */
 function Reveal({
   children,
   delay = 0,
@@ -93,8 +101,8 @@ function Reveal({
       ref={ref as any}
       style={{
         opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity 0.7s ${delay}ms cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s ${delay}ms cubic-bezier(0.16, 1, 0.3, 1)`,
+        transform: shown ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.8s ${delay}ms cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ${delay}ms cubic-bezier(0.16, 1, 0.3, 1)`,
       }}
       className={className}
     >
@@ -103,23 +111,62 @@ function Reveal({
   );
 }
 
-/* -------- Standardized Section Eyebrow -------- */
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex items-center justify-center gap-3 text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
-    <span className="h-px w-6 bg-gold/50" />
-    <span>{children}</span>
-    <span className="h-px w-6 bg-gold/50" />
+/* -------- Section Header Centered -------- */
+const SectionHeaderCenter = ({
+  number,
+  eyebrow,
+  title,
+  subtitle,
+}: {
+  number: string;
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+}) => (
+  <div className="text-center max-w-2xl mx-auto mb-14">
+    <div className="inline-flex items-center gap-2 mb-3">
+      <span className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/60 bg-[#21102A] text-[11px] font-bold text-gold-light shadow-sm">
+        {number}
+      </span>
+      <span className="text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
+        {eyebrow}
+      </span>
+    </div>
+    <h2 className="font-display text-3xl sm:text-4xl text-ivory font-normal tracking-tight">
+      {title}
+    </h2>
+    <div className="gold-line mt-4 mx-auto w-28" />
+    {subtitle && (
+      <p className="mt-3 text-sm sm:text-base text-ivory/80 font-sans leading-relaxed">
+        {subtitle}
+      </p>
+    )}
   </div>
 );
 
-const EyebrowLeft = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
-    <span className="h-px w-6 bg-gold/50" />
-    <span>{children}</span>
+/* -------- Section Badge Marker -------- */
+const SectionBadge = ({ number, title }: { number: string; title: string }) => (
+  <div className="flex items-center gap-3 mb-3">
+    <span className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/60 bg-[#21102A] text-[11px] font-bold text-gold-light shadow-sm">
+      {number}
+    </span>
+    <span className="text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
+      {title}
+    </span>
+    <span className="h-px w-8 bg-gradient-to-r from-gold/50 to-transparent" />
   </div>
 );
 
-/* -------- Standardized Sticky Navigation -------- */
+/* -------- Decorative Gold Lotus Separator -------- */
+const SacredDivider = () => (
+  <div className="my-16 flex items-center justify-center gap-4 opacity-75">
+    <span className="h-px w-20 sm:w-32 bg-gradient-to-r from-transparent to-gold/60" />
+    <span className="text-gold text-xs tracking-widest font-serif">❈  ॥  RADHE RADHE  ॥  ❈</span>
+    <span className="h-px w-20 sm:w-32 bg-gradient-to-l from-transparent to-gold/60" />
+  </div>
+);
+
+/* -------- Navigation Bar -------- */
 function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: string) => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -135,9 +182,10 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
   const navLinks = [
     { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
-    { label: "Offerings", href: "#offerings" },
-    { label: "Programs", href: "#programs" },
-    { label: "Gallery", href: "#gallery" },
+    { label: "Experience", href: "#offerings" },
+    { label: "Journeys", href: "#programs" },
+    { label: "Seva", href: "#seva" },
+    { label: "Tridevana", href: "#tridevana" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -145,8 +193,8 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-shadow/95 backdrop-blur-md py-3.5 border-b border-gold/25 shadow-md"
-          : "bg-gradient-to-b from-shadow/80 to-transparent py-5"
+          ? "bg-[#09070A]/90 backdrop-blur-md py-3.5 border-b border-gold/30 shadow-2xl"
+          : "bg-gradient-to-b from-[#09070A]/85 via-[#09070A]/40 to-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
@@ -154,45 +202,46 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
           <img
             src="/Logo.jpeg"
             alt="Yugala Radhe Krishna Tapovan Logo"
-            className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border border-gold/60 transition duration-300 group-hover:border-gold"
+            className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border border-gold/70 transition duration-300 group-hover:border-gold shadow-gold"
           />
           <div className="leading-tight">
             <span className="font-display text-sm tracking-[0.2em] text-gold-light group-hover:text-gold transition font-medium block">
               YUGALA TAPOVAN
             </span>
-            <span className="text-[11px] uppercase tracking-wider text-ivory/70 block">
+            <span className="text-[10px] uppercase tracking-widest text-ivory/70 block">
               Radhe Krishna Sanctuary
             </span>
           </div>
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-7 md:flex">
+        {/* Desktop Navigation Links */}
+        <nav className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-xs uppercase tracking-[0.2em] text-ivory/80 transition duration-200 hover:text-gold font-medium py-1"
+              className="text-[11px] uppercase tracking-[0.2em] text-ivory/80 transition duration-200 hover:text-gold font-medium py-1 relative group"
             >
               {link.label}
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
 
-        {/* Action Button */}
+        {/* Desktop CTA */}
         <div className="hidden items-center gap-4 md:flex">
           <button
-            onClick={() => onOpenConsultation()}
-            className="rounded-md border border-gold/70 bg-gold/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light transition duration-200 hover:bg-gold hover:text-shadow cursor-pointer"
+            onClick={() => onOpenConsultation("General Sanctuary Visit")}
+            className="rounded-md border border-gold/70 bg-gold/15 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light transition duration-200 hover:bg-gold hover:text-[#160B1D] cursor-pointer shadow-sm"
           >
-            Join Our Programs
+            Plan Your Visit
           </button>
         </div>
 
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-gold-light md:hidden focus:outline-none"
+          className="p-2 text-gold-light lg:hidden focus:outline-none"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -201,14 +250,14 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-gold/30 bg-shadow/98 px-6 py-6 backdrop-blur-xl md:hidden">
-          <nav className="flex flex-col gap-4 text-center">
+        <div className="border-b border-gold/30 bg-[#09070A]/95 px-6 py-6 backdrop-blur-xl lg:hidden">
+          <nav className="flex flex-col gap-3 text-center">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-xs uppercase tracking-[0.25em] text-ivory/90 hover:text-gold transition font-medium"
+                className="py-2 text-xs uppercase tracking-[0.25em] text-ivory/90 hover:text-gold transition font-medium border-b border-gold/10"
               >
                 {link.label}
               </a>
@@ -216,11 +265,11 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenConsultation();
+                onOpenConsultation("General Sanctuary Visit");
               }}
-              className="mt-3 w-full rounded-md bg-gold py-3 text-xs uppercase tracking-[0.2em] text-shadow font-bold"
+              className="mt-3 w-full rounded-md bg-gold py-3 text-xs uppercase tracking-[0.2em] text-[#160B1D] font-bold shadow-gold"
             >
-              Join Our Programs
+              Plan Your Visit
             </button>
           </nav>
         </div>
@@ -234,182 +283,191 @@ export function IndexPage() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | undefined>();
   const [legalType, setLegalType] = useState<"privacy" | "terms" | "refund" | null>(null);
-  const [activeTestimonialIdx, setActiveTestimonialIdx] = useState(0);
   const [galleryModalIdx, setGalleryModalIdx] = useState<number | null>(null);
-  const [activeWhyUsIdx, setActiveWhyUsIdx] = useState<number>(0);
+  const [subscribed, setSubscribed] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
 
   const handleOpenConsultation = (programName?: string) => {
     setSelectedProgram(programName);
     setConsultationOpen(true);
   };
 
-  const galleryItems = [
-    { title: "Ashram Grounds", img: galleryAshram, caption: "Peaceful Ashram Sanctuary Grounds" },
-    { title: "Meditation Hall", img: galleryMeditation, caption: "Guided Meditation & Sacred Silence" },
-    { title: "Retreat Sanctuary", img: tapovanImg, caption: "Transformative Spiritual Retreats" },
-    { title: "Wisdom Circle", img: diyaImg, caption: "Interactive Vedic Learning Workshops" },
-    { title: "Krishna Temple Altar", img: galleryTemple, caption: "Divine Radha Krishna Temple Shrine" },
-    { title: "Sound Healing", img: galleryHealing, caption: "Holistic Sound & Energy Alignment" },
-  ];
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newsletterEmail) {
+      setSubscribed(true);
+      setTimeout(() => {
+        setSubscribed(false);
+        setNewsletterEmail("");
+      }, 4000);
+    }
+  };
 
-  const testimonials = [
-    {
-      quote:
-        "Attending the 7-day retreat changed my perspective on life completely. The guided meditation and divine atmosphere brought me deep emotional healing and stillness.",
-      name: "Ananya Sharma",
-      role: "Retreat Participant",
-    },
-    {
-      quote:
-        "The Bhagavad Gita learning sessions at Yugala Tapovan helped me navigate complex life decisions with clarity, devotion, and peace.",
-      name: "Rajesh K. Verma",
-      role: "Academy Student",
-    },
-    {
-      quote:
-        "My children look forward to the Kids Gurukulam every weekend! They have developed respect, focus, and a beautiful connection to Radha and Krishna.",
-      name: "Priya & Amit Nambiar",
-      role: "Parents",
-    },
+  const galleryItems = [
+    { title: "Ashram Sanctuary Grounds", img: galleryAshram, caption: "Peaceful Temple Gardens & Tulsi Groves" },
+    { title: "Meditation Hall", img: galleryMeditation, caption: "Guided Meditation & Sacred Inner Silence" },
+    { title: "Retreat Sanctuary", img: tapovanImg, caption: "Transformative Spiritual Retreats surrounded by Nature" },
+    { title: "Wisdom Circle", img: diyaImg, caption: "Interactive Vedic Learning & Bhagavad Gita Discourses" },
+    { title: "Krishna Temple Altar", img: galleryTemple, caption: "Divine Radha Krishna Temple Shrine & Daily Arati" },
+    { title: "Sound & Energy Healing", img: galleryHealing, caption: "Holistic Vibration & Energy Realignment" },
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-crimson selection:text-ivory overflow-x-hidden">
-      {/* Non-intrusive Entrance Screen */}
+    <div className="min-h-screen bg-[#160B1D] text-ivory font-sans antialiased selection:bg-gold selection:text-[#160B1D] overflow-x-hidden">
+      {/* Entrance Screen */}
       <LoadingScreen />
 
       {/* Sticky Navigation */}
       <Navigation onOpenConsultation={handleOpenConsultation} />
 
-      {/* 1. HERO SECTION */}
-      <section id="hero" className="relative min-h-[90vh] flex items-center bg-shadow text-ivory pt-28 pb-20 overflow-hidden">
+      {/* 01. HOME (HERO & 5 PILLARS) */}
+      <section id="hero" className="relative min-h-[95vh] flex flex-col justify-center bg-[#160B1D] text-ivory pt-28 pb-20 overflow-hidden">
         <SacredParticles />
 
         <div className="absolute inset-0 z-0">
           <img
             src={heroImg}
-            alt="Radha and Krishna sanctuary"
-            className="h-full w-full object-cover opacity-35"
+            alt="Radha Krishna Sanctuary"
+            className="h-full w-full object-cover opacity-30 anim-slow-zoom"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-shadow via-shadow/75 to-shadow/40" />
+          <div className="absolute inset-0 bg-radial from-transparent via-[#160B1D]/75 to-[#160B1D]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#160B1D] via-[#160B1D]/60 to-[#09070A]/85" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 w-full py-12">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 w-full py-8">
           <div className="max-w-3xl">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-shadow/80 px-4 py-1.5 backdrop-blur-md mb-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-[#21102A]/85 px-4 py-1.5 backdrop-blur-md mb-6 shadow-gold">
                 <Sparkles className="h-3.5 w-3.5 text-gold" />
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-light">
-                  Radha Krishna Spiritual Sanctuary
+                  Yugala Radhe Krishna Tapovan
                 </span>
               </div>
             </Reveal>
 
             <Reveal delay={100}>
-              <h1 className="font-display text-4xl font-normal leading-[1.15] text-ivory sm:text-5xl lg:text-6xl tracking-tight">
-                Experience Divine Love.
-                <br />
-                <span className="text-gradient-gold">Awaken Your Inner Self.</span>
+              <h1 className="font-display text-4xl font-normal leading-[1.12] text-ivory sm:text-5xl lg:text-6xl tracking-tight">
+                Welcome to Yugala Radhe Krishna Tapovan
               </h1>
             </Reveal>
 
             <Reveal delay={200}>
-              <p className="mt-6 font-sans text-base sm:text-lg leading-relaxed text-ivory/80 max-w-2xl font-light">
-                A sanctuary dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by the eternal love of Radha and Krishna.
+              <p className="mt-6 font-sans text-base sm:text-lg leading-relaxed text-ivory/85 max-w-2xl font-light">
+                A sacred home where every soul is invited to experience the eternal love of Sri Radha and Sri Krishna through devotion, meditation, seva, and joyful living.
               </p>
             </Reveal>
 
             <Reveal delay={300}>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-9 flex flex-wrap items-center gap-4">
                 <button
-                  onClick={() => handleOpenConsultation()}
-                  className="inline-flex items-center gap-2.5 rounded-md bg-gold px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-shadow transition duration-200 hover:bg-gold-light cursor-pointer shadow-md"
+                  onClick={() => handleOpenConsultation("Begin Your Journey")}
+                  className="inline-flex items-center gap-2.5 rounded-md bg-gold px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#160B1D] transition duration-300 hover:bg-gold-light cursor-pointer shadow-gold"
                 >
-                  <span>Join Our Programs</span>
+                  <span>Begin Your Journey</span>
                   <ChevronRight className="h-4 w-4" />
                 </button>
 
                 <a
                   href="#about"
-                  className="inline-flex items-center gap-2 rounded-md border border-ivory/30 bg-shadow/50 backdrop-blur-sm px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-ivory transition duration-200 hover:border-gold hover:text-gold-light"
+                  className="inline-flex items-center gap-2 rounded-md border border-gold/50 bg-[#21102A]/60 backdrop-blur-sm px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-ivory transition duration-300 hover:border-gold hover:text-gold-light"
                 >
-                  <span>Explore Sanctuary</span>
-                  <ArrowUpRight className="h-4 w-4 opacity-70" />
+                  <span>Our Tapovan</span>
+                  <ArrowUpRight className="h-4 w-4 text-gold" />
                 </a>
               </div>
             </Reveal>
+          </div>
 
+          {/* Five Pillars Grid */}
+          <div className="mt-16 border-t border-gold/25 pt-10">
             <Reveal delay={400}>
-              <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 gap-6 border-t border-gold/20 pt-6 max-w-xl">
-                <div>
-                  <div className="font-display text-2xl text-gold-light font-medium">Daily</div>
-                  <div className="text-xs text-ivory/70 uppercase tracking-wider mt-0.5">Guided Meditation</div>
-                </div>
-                <div>
-                  <div className="font-display text-2xl text-gold-light font-medium">Holistic</div>
-                  <div className="text-xs text-ivory/70 uppercase tracking-wider mt-0.5">Healing & Wisdom</div>
-                </div>
-                <div className="hidden sm:block">
-                  <div className="font-display text-2xl text-gold-light font-medium">Vrindavan</div>
-                  <div className="text-xs text-ivory/70 uppercase tracking-wider mt-0.5">Sacred Atmosphere</div>
-                </div>
+              <div className="text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold mb-6">
+                Five Pillars of Tapovan
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {[
+                  { title: "Devotion", desc: "Feel the presence of Krishna", icon: Heart },
+                  { title: "Meditation", desc: "Discover inner peace", icon: Sparkles },
+                  { title: "Seva", desc: "Serve with love and compassion", icon: HandHeart },
+                  { title: "Wisdom", desc: "Learn from the Bhagavad Gita", icon: BookOpen },
+                  { title: "Community", desc: "Live in a spiritual family", icon: Users },
+                ].map((pillar, idx) => {
+                  const IconComp = pillar.icon;
+                  return (
+                    <div
+                      key={pillar.title}
+                      className="p-4 rounded-xl border border-gold/30 bg-[#21102A]/90 backdrop-blur-sm hover:border-gold transition duration-300 shadow-md"
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-center text-gold mb-3">
+                        <IconComp className="h-4 w-4" />
+                      </div>
+                      <div className="font-display text-base font-medium text-gold-light">
+                        {pillar.title}
+                      </div>
+                      <div className="text-xs text-ivory/75 mt-1 font-sans">
+                        {pillar.desc}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* 2. ABOUT SECTION */}
-      <section id="about" className="py-24 bg-background border-b border-border">
+      {/* 02. OUR TAPOVAN */}
+      <section id="about" className="py-24 bg-[#160B1D] border-b border-gold/20 relative">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
               <Reveal>
-                <EyebrowLeft>Spiritual Heritage</EyebrowLeft>
-                <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
-                  About Yugala Radhe Krishna Tapovan
+                <SectionBadge number="02" title="Our Purpose" />
+                <h2 className="mt-2 font-display text-3xl sm:text-4xl text-ivory font-normal">
+                  Our Tapovan
                 </h2>
-                <h3 className="mt-2 text-lg text-saffron font-medium">
-                  A Sacred Space for Inner Transformation
-                </h3>
+                <div className="gold-line mt-3 w-28 mb-6" />
               </Reveal>
 
               <Reveal delay={150}>
-                <div className="mt-6 space-y-4 font-sans text-base leading-relaxed text-muted-foreground">
-                  <p className="border-l-2 border-gold/60 pl-4 py-1 font-medium text-foreground/90">
-                    Yugala Radhe Krishna Tapovan is a spiritual community where seekers experience devotion, meditation, healing, and self-discovery through the timeless wisdom of Radha and Krishna.
+                <div className="space-y-4 font-sans text-base leading-relaxed text-ivory/85">
+                  <p className="border-l-2 border-gold/60 pl-4 py-1 font-medium text-ivory/95">
+                    Yugala Radhe Krishna Tapovan is a spiritual sanctuary inspired by the eternal love of Sri Radha and Sri Krishna.
                   </p>
                   <p>
-                    We believe true transformation begins within. Through guided spiritual practices, holistic wellness, and compassionate guidance, we help individuals cultivate peace, purpose, and divine consciousness.
+                    Here, devotion is not simply practised—it is experienced. Every prayer, every song, every smile, and every act of service becomes an offering of love.
+                  </p>
+                  <p>
+                    Our purpose is to help every visitor discover peace, compassion, inner joy, and Krishna Consciousness while living a meaningful and loving life.
                   </p>
                 </div>
               </Reveal>
 
               <Reveal delay={250}>
-                <div className="mt-8 grid grid-cols-2 gap-4 border-t border-border pt-6">
-                  <div className="p-4 rounded-md bg-card border border-border">
-                    <div className="font-display text-2xl text-crimson font-semibold">100%</div>
-                    <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Holistic Guidance</div>
-                  </div>
-                  <div className="p-4 rounded-md bg-card border border-border">
-                    <div className="font-display text-2xl text-crimson font-semibold">Timeless</div>
-                    <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Vedic Wisdom</div>
-                  </div>
+                <div className="mt-8">
+                  <button
+                    onClick={() => handleOpenConsultation("Read More About Tapovan")}
+                    className="rounded-md border border-gold bg-gold/15 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-gold-light hover:bg-gold hover:text-[#160B1D] transition cursor-pointer shadow-gold"
+                  >
+                    Read More
+                  </button>
                 </div>
               </Reveal>
             </div>
 
             <div className="lg:col-span-6">
               <Reveal delay={200}>
-                <div className="relative rounded-lg overflow-hidden border border-border shadow-md">
+                <div className="relative rounded-xl overflow-hidden border border-gold/40 shadow-2xl group">
                   <img
                     src={tapovanImg}
                     alt="Tapovan Sanctuary Grounds"
-                    className="w-full h-[440px] object-cover"
+                    className="w-full h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-shadow/85 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#160B1D] via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 border-l-2 border-gold pl-4 text-ivory">
-                    <p className="font-display text-base font-light italic">"Where every heart awakens to the lotus feet of Radha-Krishna."</p>
+                    <p className="font-display text-base font-light italic text-gold-light">
+                      "Every act of service becomes an offering of love."
+                    </p>
                   </div>
                 </div>
               </Reveal>
@@ -418,121 +476,415 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 3. VISION & MISSION */}
-      <section className="py-20 bg-shadow text-ivory">
+      <SacredDivider />
+
+      {/* 03. THE HEART OF YUGALA */}
+      <section id="values" className="py-24 bg-[#21102A] border-b border-gold/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Guiding Philosophy</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
-                Vision & Mission
-              </h2>
-              <div className="gold-line mt-4 mx-auto w-24" />
-            </div>
-          </Reveal>
+          <SectionHeaderCenter
+            number="03"
+            eyebrow="Guiding Principles"
+            title="The Heart of Yugala"
+            subtitle="A way of living inspired by the love, wisdom, and compassion of Sri Radha and Sri Krishna."
+          />
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Reveal delay={100}>
-              <div className="h-full rounded-lg border border-gold/30 bg-shadow/90 p-8 backdrop-blur-sm">
-                <div className="flex items-center gap-3.5 mb-4">
-                  <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-full">
-                    <Sun className="h-5 w-5" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Love like Radha",
+                desc: "Let love become the foundation of every relationship.",
+                icon: Heart,
+              },
+              {
+                title: "Live with Krishna Consciousness",
+                desc: "Bring awareness of the Divine into everyday life.",
+                icon: Crown,
+              },
+              {
+                title: "Meditate with Awareness",
+                desc: "Find stillness, clarity, and inner peace.",
+                icon: Sparkles,
+              },
+              {
+                title: "Serve with Compassion",
+                desc: "Make every act of service an offering of love.",
+                icon: HandHeart,
+              },
+              {
+                title: "Celebrate Life with Devotion",
+                desc: "Experience joy through music, prayer, festivals, and togetherness.",
+                icon: Flame,
+              },
+              {
+                title: "Empower Women with Dignity",
+                desc: "Create spaces where women can rediscover strength, confidence, and purpose.",
+                icon: ShieldCheck,
+              },
+              {
+                title: "Protect Children with Love",
+                desc: "Help children grow with values, wisdom, compassion, and joy.",
+                icon: Flower2,
+              },
+              {
+                title: "Live in Harmony with Nature",
+                desc: "Respect and nurture the natural world around us.",
+                icon: Compass,
+              },
+            ].map((val, idx) => {
+              const IconComp = val.icon;
+              return (
+                <Reveal key={val.title} delay={idx * 60}>
+                  <div className="h-full rounded-xl border border-gold/30 bg-[#160B1D]/90 p-6 hover:border-gold transition duration-300 flex flex-col justify-between group shadow-lg">
+                    <div>
+                      <div className="h-10 w-10 rounded-lg border border-gold/40 bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-[#160B1D] transition duration-300">
+                        <IconComp className="h-5 w-5" />
+                      </div>
+                      <h3 className="font-display text-lg text-gold-light font-medium group-hover:text-gold transition">
+                        {val.title}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm text-ivory/80 leading-relaxed font-sans">
+                        {val.desc}
+                      </p>
+                    </div>
+                    <div className="gold-line mt-4 w-full" />
                   </div>
-                  <h3 className="font-display text-xl text-gold-light font-medium">Our Vision</h3>
-                </div>
-                <p className="font-sans text-base leading-relaxed text-ivory/85">
-                  "To inspire humanity to live with devotion, compassion, inner peace, and Krishna Consciousness."
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <div className="h-full rounded-lg border border-gold/30 bg-shadow/90 p-8 backdrop-blur-sm">
-                <div className="flex items-center gap-3.5 mb-4">
-                  <div className="p-3 bg-crimson/30 border border-gold/40 text-gold rounded-full">
-                    <Heart className="h-5 w-5" />
-                  </div>
-                  <h3 className="font-display text-xl text-gold-light font-medium">Our Mission</h3>
-                </div>
-                <p className="font-sans text-base leading-relaxed text-ivory/85">
-                  "To create a sacred environment where individuals can heal, meditate, learn, serve, and transform through the boundless love of Radha and Krishna."
-                </p>
-              </div>
-            </Reveal>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 4. OFFERINGS */}
-      <section id="offerings" className="py-24 bg-background border-b border-border">
+      {/* 04. EXPERIENCE THE TAPOVAN */}
+      <section id="offerings" className="py-24 bg-[#160B1D] border-b border-gold/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Sacred Pathways</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
-                What We Offer
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                Comprehensive pathways for spiritual growth, learning, and self-realization.
+          <SectionHeaderCenter
+            number="04"
+            eyebrow="Daily Practices"
+            title="Experience the Tapovan"
+            subtitle="Every day at the Tapovan is an invitation to slow down, reconnect, and experience devotion."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              { title: "Morning Mangala Arati", desc: "Begin the day in prayer and divine remembrance.", img: diyaImg },
+              { title: "Guided Meditation", desc: "Discover stillness, awareness, and inner peace.", img: galleryMeditation },
+              { title: "Bhajans & Kirtan", desc: "Experience devotion through sacred music and joyful singing.", img: fluteImg },
+              { title: "Bhagavad Gita Wisdom", desc: "Explore timeless wisdom for meaningful everyday living.", img: rasaImg },
+              { title: "Spiritual Counselling", desc: "Find a compassionate space for reflection, guidance, and inner growth.", img: galleryAshram },
+              { title: "Healing Sessions", desc: "Experience peaceful practices that nurture body, mind, and spirit.", img: galleryHealing },
+              { title: "Satsang", desc: "Come together in the company of seekers, devotees, and spiritual wisdom.", img: tapovanImg },
+              { title: "Yoga", desc: "Bring harmony to body, breath, mind, and consciousness.", img: heroImg },
+              { title: "Nature Walks", desc: "Reconnect with the beauty and quietness of nature.", img: galleryTemple },
+              { title: "Tulasi Garden", desc: "Spend peaceful moments surrounded by sacred greenery.", img: galleryAshram },
+              { title: "Sattvic Bhojan", desc: "Share simple, nourishing vegetarian food prepared with love.", img: diyaImg },
+              { title: "Seva", desc: "Transform everyday service into an offering of devotion.", img: rasaImg },
+            ].map((item, idx) => (
+              <Reveal key={item.title} delay={idx * 50}>
+                <div
+                  onClick={() => handleOpenConsultation(item.title)}
+                  className="group relative h-72 rounded-xl overflow-hidden border border-gold/30 bg-[#21102A] shadow-xl hover:border-gold transition duration-300 cursor-pointer flex flex-col justify-end p-5"
+                >
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="absolute inset-0 h-full w-full object-cover opacity-45 transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#160B1D] via-[#160B1D]/60 to-transparent" />
+                  
+                  <div className="relative z-10">
+                    <span className="text-[10px] uppercase tracking-widest text-gold-light font-semibold bg-gold/15 px-2.5 py-1 rounded border border-gold/30 inline-block mb-2">
+                      Tapovan Experience
+                    </span>
+                    <h3 className="font-display text-xl text-ivory font-medium group-hover:text-gold transition">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-ivory/80 mt-1 line-clamp-2">
+                      {item.desc}
+                    </p>
+                    <div className="mt-3 flex items-center gap-1.5 text-xs text-gold font-semibold uppercase tracking-wider">
+                      <span>Reserve Experience</span>
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button
+              onClick={() => handleOpenConsultation("Experience a Day at the Tapovan")}
+              className="rounded-md bg-gold px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#160B1D] hover:bg-gold-light transition cursor-pointer shadow-gold"
+            >
+              Experience a Day at the Tapovan
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 05. LIFE AT THE TAPOVAN */}
+      <section id="life" className="py-24 bg-[#21102A] border-b border-gold/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <SectionHeaderCenter
+            number="05"
+            eyebrow="Living Sanctuary"
+            title="Life at the Tapovan"
+            subtitle="A living spiritual home where devotion becomes part of everyday life."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              { title: "Singing Together", desc: "Sharing devotion through music, prayer, and kirtan." },
+              { title: "Children Laughing", desc: "Creating a joyful environment where children can learn, play, and grow." },
+              { title: "Women Learning", desc: "Encouraging learning, confidence, dignity, and self-discovery." },
+              { title: "Silent Meditation", desc: "Finding moments of stillness amidst the rhythm of everyday life." },
+              { title: "Cooking Together", desc: "Preparing food with love and sharing it as an offering." },
+              { title: "Flower Decoration", desc: "Expressing devotion through flowers, beauty, and creativity." },
+              { title: "Krishna Festivals", desc: "Celebrating divine love with music, colour, prayer, and togetherness." },
+              { title: "Cow Seva", desc: "Serving and caring for cows with love and compassion." },
+              { title: "Garden Life", desc: "Living close to nature and appreciating its quiet beauty." },
+              { title: "Shared Meals", desc: "Coming together around simple, nourishing sattvic food." },
+              { title: "Prayer & Satsang", desc: "Growing together through prayer, wisdom, and spiritual fellowship." },
+              { title: "Joyful Community", desc: "Living together with love, compassion, respect, and devotion." },
+            ].map((life, idx) => (
+              <Reveal key={life.title} delay={idx * 50}>
+                <div className="p-5 rounded-xl border border-gold/30 bg-[#160B1D] h-full hover:border-gold transition duration-300 flex flex-col justify-between shadow-md">
+                  <div>
+                    <h3 className="font-display text-lg text-gold-light font-medium">{life.title}</h3>
+                    <p className="text-xs text-ivory/80 mt-1.5 leading-relaxed font-sans">{life.desc}</p>
+                  </div>
+                  <div className="gold-line mt-4 w-full" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={200}>
+            <div className="p-6 rounded-xl border border-gold/40 bg-[#160B1D] text-center max-w-3xl mx-auto shadow-xl">
+              <p className="font-display text-lg sm:text-xl text-gold-light italic">
+                "A place where every moment is filled with devotion, love, joy, learning, and togetherness."
               </p>
             </div>
           </Reveal>
+        </div>
+      </section>
 
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* 06. WOMEN'S SANCTUARY */}
+      <section className="py-24 bg-[#160B1D] border-b border-gold/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-6">
+              <Reveal>
+                <SectionBadge number="06" title="Nurturing Hope" />
+                <h2 className="mt-2 font-display text-3xl sm:text-4xl text-ivory font-normal">
+                  Women's Sanctuary
+                </h2>
+                <p className="mt-3 text-lg font-display text-gold-light italic">
+                  "Every woman deserves love, respect, dignity, and the opportunity to begin again."
+                </p>
+              </Reveal>
+
+              <Reveal delay={150}>
+                <div className="mt-5 space-y-4 text-sm sm:text-base text-ivory/85 leading-relaxed font-sans">
+                  <p>
+                    Through spiritual guidance, education, skill development, accommodation, holistic wellness, and compassionate care, we aspire to help women rediscover confidence, purpose, and inner strength.
+                  </p>
+                  <p>
+                    Our sanctuary seeks to create a safe and nurturing space where women can pause, heal, learn, grow, and step forward with renewed confidence.
+                  </p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={250}>
+                <div className="mt-8">
+                  <button
+                    onClick={() => handleOpenConsultation("Women's Sanctuary")}
+                    className="rounded-md bg-gold px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#160B1D] hover:bg-gold-light transition cursor-pointer shadow-gold"
+                  >
+                    Discover the Sanctuary
+                  </button>
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-6">
+              <Reveal delay={200}>
+                <div className="relative rounded-xl overflow-hidden border border-gold/40 shadow-2xl">
+                  <img
+                    src={galleryHealing}
+                    alt="Women Sanctuary Atmosphere"
+                    className="w-full h-[440px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#160B1D] via-transparent to-transparent" />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 07. SPIRITUAL JOURNEYS */}
+      <section id="programs" className="py-24 bg-[#21102A] border-b border-gold/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <SectionHeaderCenter
+            number="07"
+            eyebrow="Retreats & Programs"
+            title="Spiritual Journeys"
+            subtitle="Come for a day, stay for a while, or walk deeper into your spiritual journey."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "Spiritual Retreats",
-                desc: "Transformative one-day, weekend, and seven-day retreats.",
-                icon: Compass,
+                title: "One Day with Krishna",
+                desc: "A peaceful day of prayer, meditation, satsang, seva, and joyful living.",
               },
               {
-                title: "Meditation & Healing",
-                desc: "Guided meditation, emotional healing, mindfulness, and holistic wellness.",
-                icon: Flower2,
+                title: "Weekend in Vrindavan",
+                desc: "Step away from everyday life and reconnect with devotion, nature, and inner peace.",
               },
               {
-                title: "Academy",
-                desc: "Courses in Krishna Consciousness, Bhagavad Gita, Yoga, Meditation, and Spiritual Development.",
-                icon: BookOpen,
+                title: "Seven Days of Inner Transformation",
+                desc: "A deeper journey through meditation, wisdom, reflection, devotion, and conscious living.",
               },
               {
-                title: "Workshops",
-                desc: "Interactive sessions for self-growth, mindfulness, parenting, youth, and wellness.",
-                icon: Users,
+                title: "Children's Gurukulam",
+                desc: "A joyful environment where children discover values, wisdom, culture, and devotion.",
               },
               {
-                title: "Consultation",
-                desc: "Personal guidance for spiritual, emotional, and life transformation.",
-                icon: Sparkles,
+                title: "Family Retreat",
+                desc: "Experience prayer, connection, learning, and togetherness as a family.",
               },
               {
-                title: "Facilitator Training",
-                desc: "Become a certified meditation and spiritual wellness facilitator.",
-                icon: ShieldCheck,
+                title: "Full Moon Meditation",
+                desc: "Gather beneath the full moon for an evening of meditation, silence, and spiritual reflection.",
               },
-            ].map((offer, index) => {
-              const IconComp = offer.icon;
+              {
+                title: "Bhagavad Gita Journey",
+                desc: "Explore timeless wisdom and discover its meaning in everyday life.",
+              },
+              {
+                title: "Prolonged Retreats",
+                desc: "Spend more time within the peaceful rhythm of the Tapovan and deepen your spiritual journey.",
+              },
+            ].map((journey, idx) => (
+              <Reveal key={journey.title} delay={idx * 60}>
+                <div className="h-full rounded-xl border border-gold/30 bg-[#160B1D] p-6 hover:border-gold transition duration-300 flex flex-col justify-between shadow-lg group">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-widest text-gold-light font-bold block mb-2">
+                      Spiritual Journey
+                    </span>
+                    <h3 className="font-display text-xl text-ivory font-medium group-hover:text-gold transition">
+                      {journey.title}
+                    </h3>
+                    <p className="mt-2.5 text-xs sm:text-sm text-ivory/80 leading-relaxed font-sans">
+                      {journey.desc}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleOpenConsultation(journey.title)}
+                    className="mt-6 w-full rounded border border-gold/60 bg-gold/10 py-2.5 text-xs font-semibold uppercase tracking-wider text-gold hover:bg-gold hover:text-[#160B1D] transition duration-300 cursor-pointer"
+                  >
+                    Inquire Journey
+                  </button>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 08. CELEBRATIONS */}
+      <section id="celebrations" className="py-24 bg-[#160B1D] border-b border-gold/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <SectionHeaderCenter
+            number="08"
+            eyebrow="Sacred Festivals"
+            title="Celebrations"
+            subtitle="Where devotion becomes music, colour, celebration, and togetherness."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { title: "Janmashtami", desc: "Celebrate the divine appearance of Sri Krishna with devotion and joy." },
+              { title: "Radhashtami", desc: "Honour the divine love and grace of Sri Radha." },
+              { title: "Holi", desc: "Celebrate the festival of colours with devotion, music, joy, and togetherness." },
+              { title: "Guru Purnima", desc: "Express gratitude and reverence towards the Guru and the path of wisdom." },
+              { title: "Pournami", desc: "Gather under the fullness of the moon for prayer, meditation, and spiritual reflection." },
+              { title: "Kirtan Evenings", desc: "Come together through sacred music, chanting, and joyful devotion." },
+              { title: "Rasa Celebration", desc: "Celebrate the timeless divine love of Radha and Krishna." },
+              { title: "Annadanam", desc: "Share food as an offering of love and compassion." },
+              { title: "Bhajan Festivals", desc: "Experience devotion through sacred songs and collective prayer." },
+              { title: "Seva & Community Events", desc: "Come together to serve, celebrate, and strengthen the spirit of community." },
+            ].map((fest, idx) => (
+              <Reveal key={fest.title} delay={idx * 50}>
+                <div className="h-full rounded-xl border border-gold/30 bg-[#21102A] p-5 hover:border-saffron transition duration-300 flex flex-col justify-between group shadow-md">
+                  <div>
+                    <h3 className="font-display text-lg text-gold-light font-medium group-hover:text-gold transition">
+                      {fest.title}
+                    </h3>
+                    <p className="mt-2 text-xs text-ivory/80 leading-relaxed font-sans">
+                      {fest.desc}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleOpenConsultation(`Celebration: ${fest.title}`)}
+                    className="mt-4 text-xs uppercase tracking-wider text-gold hover:text-gold-light font-semibold flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Participate</span>
+                    <ChevronRight className="h-3 w-3" />
+                  </button>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 09. YUGALA SPIRITUAL STORE */}
+      <section id="store" className="py-24 bg-[#21102A] border-b border-gold/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <SectionHeaderCenter
+            number="09"
+            eyebrow="Sacred Boutique"
+            title="Yugala Spiritual Store"
+            subtitle="Sacred and meaningful offerings to carry a little of the Tapovan home with you."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              { title: "Tulsi Malas", desc: "Sacred malas traditionally associated with devotion and remembrance.", icon: ShoppingBag },
+              { title: "Rudraksha", desc: "Sacred beads cherished as part of spiritual practice and meditation.", icon: Flame },
+              { title: "Radha Krishna Murtis", desc: "Beautiful devotional representations of Sri Radha and Sri Krishna.", icon: Crown },
+              { title: "Spiritual Books", desc: "Books and wisdom to support reflection, learning, and spiritual growth.", icon: BookOpen },
+              { title: "Incense", desc: "Fragrant offerings to create a peaceful and devotional atmosphere.", icon: Sparkles },
+              { title: "Essential Oils", desc: "Natural fragrances for moments of relaxation, meditation, and inner stillness.", icon: Flower2 },
+              { title: "Meditation Kits", desc: "Thoughtfully selected essentials to support your personal practice.", icon: Gift },
+              { title: "Natural Healing Products", desc: "Natural offerings inspired by holistic and mindful living.", icon: Heart },
+              { title: "Handmade Devotional Gifts", desc: "Meaningful handcrafted items created with love and devotion.", icon: HandHeart },
+            ].map((prod, idx) => {
+              const IconComp = prod.icon;
               return (
-                <Reveal key={offer.title} delay={index * 80}>
-                  <div className="h-full rounded-lg border border-border bg-card p-6 flex flex-col justify-between hover:border-gold/60 transition duration-300 shadow-sm">
+                <Reveal key={prod.title} delay={idx * 60}>
+                  <div className="h-full rounded-xl border border-gold/30 bg-[#160B1D] p-6 hover:border-gold transition duration-300 flex flex-col justify-between group shadow-xl">
                     <div>
-                      <div className="h-11 w-11 rounded-md border border-gold/30 bg-muted/50 flex items-center justify-center text-crimson mb-5">
+                      <div className="h-10 w-10 rounded-lg border border-gold/40 bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-[#160B1D] transition duration-300">
                         <IconComp className="h-5 w-5" />
                       </div>
-                      <h3 className="font-display text-xl font-medium text-foreground">
-                        {offer.title}
+                      <h3 className="font-display text-xl text-gold-light font-medium group-hover:text-gold transition">
+                        {prod.title}
                       </h3>
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                        {offer.desc}
+                      <p className="mt-2 text-xs sm:text-sm text-ivory/80 leading-relaxed font-sans">
+                        {prod.desc}
                       </p>
                     </div>
 
                     <button
-                      onClick={() => handleOpenConsultation(offer.title)}
-                      className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-crimson hover:text-gold-antique transition cursor-pointer"
+                      onClick={() => handleOpenConsultation(`Store Item: ${prod.title}`)}
+                      className="mt-6 w-full rounded border border-gold/60 bg-gold/10 py-2.5 text-xs font-semibold uppercase tracking-wider text-gold hover:bg-gold hover:text-[#160B1D] transition duration-300 cursor-pointer"
                     >
-                      <span>Explore Offering</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" />
+                      Visit Store
                     </button>
                   </div>
                 </Reveal>
@@ -542,526 +894,356 @@ export function IndexPage() {
         </div>
       </section>
 
-      {/* 5. WHY CHOOSE US */}
-      <section className="py-24 bg-shadow text-ivory">
+      {/* 10. SEVA */}
+      <section id="seva" className="py-24 bg-[#160B1D] border-b border-gold/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <SectionHeaderCenter
+            number="10"
+            eyebrow="Selfless Service"
+            title="Seva"
+            subtitle="Service becomes sacred when it is offered with love."
+          />
+
+          <Reveal delay={100}>
+            <p className="text-center max-w-2xl mx-auto text-base text-ivory/85 leading-relaxed font-sans mb-12 italic">
+              "Every act of seva, whether small or great, can become an offering at the lotus feet of Sri Radha and Sri Krishna."
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              { title: "Annadanam", desc: "Share nourishing food and the warmth of compassion." },
+              { title: "Supporting Children", desc: "Help create opportunities for children to learn, grow, and flourish." },
+              { title: "Women's Empowerment", desc: "Support spaces that nurture dignity, confidence, education, and independence." },
+              { title: "Tree Planting", desc: "Serve nature by planting and caring for trees." },
+              { title: "Temple Seva", desc: "Contribute your time and effort to the care of sacred spaces." },
+              { title: "Volunteer Opportunities", desc: "Offer your skills, time, and presence to the Tapovan community." },
+              { title: "Supporting Retreats", desc: "Help create peaceful spaces for spiritual journeys and retreats." },
+              { title: "Education", desc: "Support learning, wisdom, values, and meaningful growth." },
+            ].map((s, i) => (
+              <Reveal key={s.title} delay={i * 50}>
+                <div className="p-5 rounded-xl border border-gold/30 bg-[#21102A] h-full hover:border-gold transition duration-300 flex flex-col justify-between shadow-md">
+                  <div>
+                    <h3 className="font-display text-lg text-gold-light font-medium">{s.title}</h3>
+                    <p className="text-xs text-ivory/80 mt-1.5 leading-relaxed font-sans">{s.desc}</p>
+                  </div>
+                  <div className="gold-line mt-4 w-full" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button
+              onClick={() => handleOpenConsultation("Join Seva")}
+              className="rounded-md bg-gold px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#160B1D] hover:bg-gold-light transition cursor-pointer shadow-gold"
+            >
+              Join Seva
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. FOUNDER'S MESSAGE */}
+      <section className="py-24 bg-[#21102A] border-b border-gold/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <Reveal>
-                <EyebrowLeft>Sanctuary Distinctives</EyebrowLeft>
-                <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
-                  Why Choose Us
-                </h2>
-                <p className="mt-4 text-sm sm:text-base text-ivory/80 leading-relaxed">
-                  Discover a nurtured environment designed to elevate your mind, soothe your soul, and anchor your spirit in divine love.
-                </p>
-                <div className="mt-8">
-                  <button
-                    onClick={() => handleOpenConsultation()}
-                    className="rounded-md bg-gold px-7 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-shadow hover:bg-gold-light transition cursor-pointer"
-                  >
-                    Start Your Path Today
-                  </button>
+                <div className="relative rounded-xl overflow-hidden border border-gold/40 shadow-2xl">
+                  <img
+                    src={diyaImg}
+                    alt="Sri Krishna Abhirra portrait"
+                    className="w-full h-[440px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#160B1D] via-transparent to-transparent" />
                 </div>
               </Reveal>
             </div>
 
             <div className="lg:col-span-7">
-              <div className="space-y-3">
-                {[
-                  "Rooted in Krishna Consciousness",
-                  "Experienced Spiritual Guidance",
-                  "Meditation & Healing Programs",
-                  "Holistic Personal Development",
-                  "Value-Based Learning",
-                  "Supportive Spiritual Community",
-                  "Peaceful Learning Environment",
-                ].map((item, idx) => (
-                  <Reveal key={item} delay={idx * 60}>
-                    <div
-                      onMouseEnter={() => setActiveWhyUsIdx(idx)}
-                      className={`flex items-center gap-3.5 rounded-lg border px-5 py-3.5 transition-all duration-200 cursor-pointer ${
-                        activeWhyUsIdx === idx
-                          ? "border-gold bg-shadow/95 text-ivory shadow-sm"
-                          : "border-gold/20 bg-shadow/60 text-ivory/80 hover:border-gold/40"
-                      }`}
-                    >
-                      <div
-                        className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition ${
-                          activeWhyUsIdx === idx ? "bg-gold text-shadow" : "bg-crimson/50 text-gold"
-                        }`}
-                      >
-                        <Check className="h-3.5 w-3.5" />
-                      </div>
-                      <span className="font-sans text-sm font-medium">
-                        {item}
-                      </span>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+              <Reveal>
+                <SectionBadge number="11" title="Spiritual Guidance" />
+                <h2 className="mt-2 font-display text-3xl sm:text-4xl text-ivory font-normal">
+                  Founder's Message
+                </h2>
+                <h3 className="mt-1 text-lg font-display text-gold-light font-medium">
+                  A Message from Sri Krishna Abhirra
+                </h3>
+                <div className="gold-line mt-3 w-32 mb-6" />
+              </Reveal>
 
-      {/* 6. CORE PROGRAMS */}
-      <section id="programs" className="py-24 bg-background border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Featured Offerings</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
-                Our Core Programs
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                Deepen your practice with structured programs designed for seekers of all stages.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "7-Day Inner Transformation Retreat",
-                desc: "An immersive week of deep sadhana, guided meditation, silent reflection, and divine Krishna Consciousness.",
-                tag: "Retreat",
-                duration: "7 Days / 6 Nights",
-                img: tapovanImg,
-                features: ["Guided Silence & Sadhana", "Personal Meditation Mentor", "Organic Satvik Meals"],
-              },
-              {
-                title: "Weekend Spiritual Retreat",
-                desc: "Recharge your spirit over Saturday & Sunday with sacred kirtan, yoga, pranayama, and healing circles.",
-                tag: "Weekend",
-                duration: "Sat & Sun (2 Days)",
-                img: heroImg,
-                features: ["Sacred Kirtan & Chanting", "Pranayama & Hatha Yoga", "Spiritual Sangha Circles"],
-              },
-              {
-                title: "Kids Gurukulam",
-                desc: "Nurturing young minds with Vedic values, storytelling, mindfulness, Bhagavad Gita slokas, and creative arts.",
-                tag: "Youth",
-                duration: "Weekend Sessions",
-                img: galleryTemple,
-                features: ["Vedic Storytelling & Slokas", "Mindfulness for Children", "Creative Arts & Drama"],
-              },
-              {
-                title: "Healing & Meditation Programs",
-                desc: "Emotional release, sound healing, mantra chanting, and restorative energy alignment for deep inner peace.",
-                tag: "Wellness",
-                duration: "Flexible / Guided",
-                img: galleryHealing,
-                features: ["Vibrational Sound Therapy", "Chakra Energy Alignment", "Stress & Anxiety Release"],
-              },
-              {
-                title: "Bhagavad Gita Learning",
-                desc: "Systematic verse-by-verse study revealing practical life wisdom and devotion for modern daily living.",
-                tag: "Academy",
-                duration: "12-Week Certificate",
-                img: diyaImg,
-                features: ["Verse-by-Verse Discourse", "Practical Life Wisdom", "Interactive Q&A Sessions"],
-              },
-              {
-                title: "Yoga & Pranayama",
-                desc: "Harmonize body, breath, and spirit through traditional hatha yoga and breath expansion techniques.",
-                tag: "Holistic",
-                duration: "Daily Morning Batches",
-                img: galleryMeditation,
-                features: ["Traditional Hatha Yoga", "Deep Breathwork Mastery", "Mindful Body Movement"],
-              },
-            ].map((program, idx) => (
-              <Reveal key={program.title} delay={idx * 80}>
-                <div className="group h-full rounded-xl border border-border bg-card overflow-hidden shadow-sm hover:border-gold/60 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
-                  <div>
-                    {/* Program Image Banner with Overlays */}
-                    <div className="relative h-48 w-full overflow-hidden bg-shadow">
-                      <img
-                        src={program.img}
-                        alt={program.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-shadow via-shadow/40 to-transparent" />
-                      
-                      {/* Category Badge */}
-                      <div className="absolute top-3 left-3">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-gold-light bg-shadow/80 backdrop-blur-md px-3 py-1 rounded-md border border-gold/40">
-                          {program.tag}
-                        </span>
-                      </div>
-
-                      {/* Duration Tag */}
-                      <div className="absolute bottom-3 right-3 flex items-center gap-1.5 text-xs text-ivory/90 bg-shadow/80 backdrop-blur-sm px-2.5 py-1 rounded-md border border-ivory/20">
-                        <Calendar className="h-3 w-3 text-gold" />
-                        <span>{program.duration}</span>
-                      </div>
-                    </div>
-
-                    {/* Program Main Content */}
-                    <div className="p-6">
-                      <h3 className="font-display text-xl font-medium text-foreground group-hover:text-crimson transition duration-200">
-                        {program.title}
-                      </h3>
-                      <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
-                        {program.desc}
-                      </p>
-
-                      {/* Program Feature Checklist */}
-                      <div className="mt-5 border-t border-border pt-4 space-y-2">
-                        {program.features.map((feat) => (
-                          <div key={feat} className="flex items-center gap-2 text-xs text-foreground/80">
-                            <Check className="h-3.5 w-3.5 text-gold shrink-0" />
-                            <span>{feat}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Bottom CTA */}
-                  <div className="px-6 pb-6 pt-2">
-                    <button
-                      onClick={() => handleOpenConsultation(program.title)}
-                      className="w-full rounded-md border border-gold/60 bg-gold/10 py-3 text-xs font-semibold uppercase tracking-wider text-crimson hover:bg-crimson hover:text-ivory hover:border-crimson transition duration-200 cursor-pointer flex items-center justify-center gap-2 group/btn"
-                    >
-                      <span>Enroll / Inquire</span>
-                      <ChevronRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                    </button>
-                  </div>
+              <Reveal delay={150}>
+                <div className="space-y-4 font-sans text-base text-ivory/90 leading-relaxed italic">
+                  <Quote className="h-8 w-8 text-gold/40 mb-2" />
+                  <p className="font-semibold text-gold-light">
+                    "My life is an offering at the lotus feet of Sri Radha and Sri Krishna."
+                  </p>
+                  <p>
+                    "Through Yugala Radhe Krishna Tapovan, my prayer is to create a place where every soul can experience divine love, every woman can rediscover her strength and dignity, every child can grow with values and wisdom, and every visitor can feel the living presence of Krishna in daily life."
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-gold/20 font-display text-lg text-gold-light font-medium">
+                  — Sri Krishna Abhirra
                 </div>
               </Reveal>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 7. COMMUNITY / SANGHA */}
-      <section className="py-20 bg-shadow text-ivory relative overflow-hidden">
+      {/* 12. VISIT THE TAPOVAN */}
+      <section id="contact" className="py-24 bg-[#160B1D] border-b border-gold/20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={rasaImg} alt="Community Celebration" className="h-full w-full object-cover opacity-15" />
-          <div className="absolute inset-0 bg-shadow/90" />
+          <img src={tapovanImg} alt="Tapovan Entrance" className="w-full h-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#160B1D] via-[#160B1D]/80 to-[#160B1D]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="max-w-2xl">
-            <Reveal>
-              <EyebrowLeft>Join the Sangha</EyebrowLeft>
-              <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
-                Become Part of the Yugala Family
+          <SectionHeaderCenter
+            number="12"
+            eyebrow="Sanctuary Invitation"
+            title="Visit the Tapovan"
+            subtitle="Come as you are. Spend a moment, stay for a while, and experience the peace of the Tapovan."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              { title: "Location", detail: "Find your way to Yugala Radhe Krishna Tapovan and enter a space created for devotion, peace, and spiritual living.", icon: MapPin },
+              { title: "Visiting Hours", detail: "Plan your visit around our daily spiritual activities and sacred gatherings.", icon: Clock },
+              { title: "Stay & Retreat Accommodation", detail: "Stay close to nature, prayer, community, and the peaceful rhythm of the Tapovan.", icon: Home },
+              { title: "Retreat Bookings", detail: "Begin your spiritual journey through one of our immersive retreats.", icon: Calendar },
+              { title: "Volunteer Opportunities", detail: "Offer your time, skills, and heart in seva.", icon: HandHeart },
+              { title: "Prayer Requests", detail: "Share your prayer with the Tapovan community.", icon: Heart },
+              { title: "Contact", detail: "Reach out to us for visits, retreats, accommodation, seva, and spiritual gatherings.", icon: Mail },
+            ].map((v, i) => {
+              const Icon = v.icon;
+              return (
+                <Reveal key={v.title} delay={i * 50}>
+                  <div className="p-6 rounded-xl border border-gold/30 bg-[#21102A]/90 backdrop-blur-sm h-full flex flex-col justify-between">
+                    <div>
+                      <div className="p-2.5 bg-gold/15 border border-gold/40 text-gold rounded-lg w-fit mb-3">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="font-display text-lg text-gold-light font-medium">{v.title}</h3>
+                      <p className="text-xs text-ivory/80 mt-1.5 leading-relaxed font-sans">{v.detail}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <button
+              onClick={() => handleOpenConsultation("Plan Your Visit")}
+              className="rounded-md bg-gold px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#160B1D] hover:bg-gold-light transition cursor-pointer shadow-gold"
+            >
+              Plan Your Visit
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 13. OUR NEXT DIVINE PROJECT (TRIDEVANA) */}
+      <section id="tridevana" className="py-24 bg-[#09070A] border-b border-gold/30 relative">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <SectionBadge number="13" title="Vision for the Future" />
+              <span className="text-xs uppercase tracking-[0.3em] text-saffron font-bold block mb-2">
+                OUR NEXT DIVINE PROJECT
+              </span>
+              <h2 className="font-display text-4xl sm:text-5xl text-ivory font-normal tracking-tight">
+                Tridevana – A Sacred Temple & Yogashram
               </h2>
-            </Reveal>
+              <p className="text-lg font-display text-gold-light mt-1">
+                A Vision for the Future
+              </p>
+              <div className="gold-line mt-4 mx-auto w-32" />
+            </div>
+          </Reveal>
 
-            <Reveal delay={150}>
-              <div className="mt-4 space-y-3 text-sm sm:text-base text-ivory/85 leading-relaxed">
-                <p>
-                  Join a growing community of spiritual seekers committed to inner peace, devotion, learning, and selfless service.
-                </p>
-                <p>
-                  Membership offers access to retreats, meditation sessions, workshops, exclusive learning resources, and community events.
-                </p>
+          <Reveal delay={100}>
+            <div className="max-w-3xl mx-auto space-y-4 text-base text-ivory/85 leading-relaxed font-sans text-center mb-14">
+              <p>
+                Inspired by the divine love and teachings of Sri Radha and Sri Krishna, our next sacred project, Tridevana Temple & Yogashram, is envisioned as a spiritual destination where ancient wisdom meets conscious living.
+              </p>
+              <p>
+                Tridevana will be a divine space dedicated to devotion, meditation, yoga, spiritual learning, healing, and self-realization—a place where seekers can experience inner peace, divine connection, and the timeless beauty of Indian spiritual traditions.
+              </p>
+              <p>
+                Through sacred architecture, peaceful gardens, meditation spaces, cultural activities, and spiritual gatherings, Tridevana aims to create an atmosphere where every visitor can reconnect with the Divine and discover harmony within themselves.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Vision of Tridevana */}
+          <Reveal delay={150}>
+            <div className="p-8 rounded-2xl border border-gold/30 bg-[#21102A] max-w-3xl mx-auto mb-14 text-center shadow-xl">
+              <h3 className="font-display text-xl text-gold-light font-medium mb-3">
+                The Vision of Tridevana
+              </h3>
+              <p className="text-sm text-ivory/80 mb-4 font-sans italic">
+                To create a living spiritual ecosystem where:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-ivory/90 font-sans text-left">
+                <div className="flex items-center gap-2 p-2 rounded bg-[#160B1D] border border-gold/20">
+                  <Sparkles className="h-4 w-4 text-gold shrink-0" />
+                  <span>Devotion becomes an experience</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 rounded bg-[#160B1D] border border-gold/20">
+                  <Sparkles className="h-4 w-4 text-gold shrink-0" />
+                  <span>Meditation becomes a way of life</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 rounded bg-[#160B1D] border border-gold/20">
+                  <Sparkles className="h-4 w-4 text-gold shrink-0" />
+                  <span>Wisdom becomes practical living</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 rounded bg-[#160B1D] border border-gold/20">
+                  <Sparkles className="h-4 w-4 text-gold shrink-0" />
+                  <span>Nature becomes a place of healing</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 sm:col-span-2 justify-center rounded bg-[#160B1D] border border-gold/20">
+                  <Sparkles className="h-4 w-4 text-gold shrink-0" />
+                  <span>Community becomes a family of love and compassion</span>
+                </div>
               </div>
-            </Reveal>
+            </div>
+          </Reveal>
 
-            <Reveal delay={250}>
-              <div className="mt-8">
+          {/* Tridevana Will Include (10 items) */}
+          <Reveal delay={200}>
+            <div className="mb-14">
+              <h3 className="font-display text-2xl text-center text-ivory font-normal mb-8">
+                Tridevana Will Include
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {[
+                  { title: "Sacred Temple Spaces", desc: "Spaces dedicated to prayer, devotion, and divine remembrance." },
+                  { title: "Meditation & Yoga Halls", desc: "Peaceful environments for meditation, yoga, breathwork, and inner stillness." },
+                  { title: "Spiritual Learning Centre", desc: "A place to explore spiritual wisdom, philosophy, culture, and conscious living." },
+                  { title: "Bhagavad Gita & Vedic Wisdom Programs", desc: "Discover timeless teachings and their relevance to everyday life." },
+                  { title: "Retreat Facilities", desc: "Spaces designed for deeper reflection, spiritual journeys, and transformative retreats." },
+                  { title: "Nature Gardens & Sacred Groves", desc: "Peaceful natural spaces for walking, contemplation, meditation, and connection with nature." },
+                  { title: "Sattvic Food & Community Dining", desc: "Simple, nourishing food shared in the spirit of gratitude and togetherness." },
+                  { title: "Cultural Celebrations", desc: "Spaces for festivals, music, traditional arts, devotional gatherings, and cultural expression." },
+                  { title: "Healing & Wellness Experiences", desc: "Holistic experiences that encourage balance, awareness, and inner wellbeing." },
+                  { title: "Spaces for Seva and Gatherings", desc: "Open spaces where people can come together in service, devotion, learning, and community." },
+                ].map((feat) => (
+                  <div key={feat.title} className="p-4 rounded-xl border border-gold/30 bg-[#21102A] hover:border-gold transition duration-300 flex flex-col justify-between shadow-md">
+                    <div>
+                      <Sparkles className="h-4 w-4 text-gold mb-2" />
+                      <h4 className="font-display text-sm text-gold-light font-medium">{feat.title}</h4>
+                      <p className="text-xs text-ivory/75 mt-1 leading-relaxed font-sans">{feat.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Epilogue Banner */}
+          <Reveal delay={250}>
+            <div className="p-8 rounded-2xl border border-gold/40 bg-gradient-to-r from-[#21102A] via-[#160B1D] to-[#21102A] text-center max-w-3xl mx-auto shadow-2xl space-y-3">
+              <span className="text-xs uppercase tracking-[0.25em] text-gold font-bold block">
+                A Divine Abode in the Making
+              </span>
+              <p className="text-base text-ivory/90 font-sans italic">
+                "From the love of Radha and Krishna, a vision is born—to create sacred spaces where every soul can experience devotion, peace, wisdom, and the presence of the Divine."
+              </p>
+              <div className="pt-2 font-display text-2xl text-gold-light font-medium">
+                Coming Soon – Tridevana Temple & Yogashram
+              </div>
+              <p className="text-xs text-gold-antique uppercase tracking-widest font-sans">
+                A journey from devotion to realization, from knowledge to experience, from seeking to becoming.
+              </p>
+              <div className="pt-3">
                 <button
-                  onClick={() => handleOpenConsultation("Community Membership")}
-                  className="rounded-md bg-gold px-7 py-3 text-xs uppercase tracking-[0.2em] font-semibold text-shadow hover:bg-gold-light transition cursor-pointer"
+                  onClick={() => handleOpenConsultation("Tridevana Project Inquiry")}
+                  className="rounded-md bg-gold px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-[#160B1D] hover:bg-gold-light transition cursor-pointer shadow-gold"
                 >
-                  Join Community Membership
+                  Inquire & Support Tridevana
                 </button>
               </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. GALLERY */}
-      <section id="gallery" className="py-24 bg-background border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Sanctuary Moments</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
-                Gallery
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                Visual glimpses of devotion, meditation, and sacred spaces at Tapovan. Click any image to preview.
-              </p>
             </div>
           </Reveal>
-
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryItems.map((item, idx) => (
-              <Reveal key={item.title} delay={idx * 80}>
-                <div
-                  onClick={() => setGalleryModalIdx(idx)}
-                  className="group relative overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-gold/60 transition duration-300 cursor-pointer"
-                >
-                  <div className="h-60 overflow-hidden relative">
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-shadow/40 opacity-0 group-hover:opacity-100 transition duration-200 flex items-center justify-center">
-                      <div className="p-2.5 rounded-full bg-gold text-shadow">
-                        <Maximize2 className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-4 border-t border-border">
-                    <div className="font-display text-base font-medium text-foreground">{item.title}</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">{item.caption}</div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 9. TESTIMONIALS */}
-      <section className="py-24 bg-card border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Seeker Reflections</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-medium text-foreground sm:text-4xl">
-                Testimonials
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                Reflections from participants whose lives were transformed at Tapovan.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 max-w-3xl mx-auto">
-            <Reveal delay={150}>
-              <div className="rounded-xl border border-border bg-background p-8 sm:p-10 shadow-sm relative">
-                <Quote className="h-8 w-8 text-gold-antique/30 mb-3" />
-                <div className="flex items-center gap-1 text-gold mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
-                  ))}
-                </div>
-                <p className="font-sans text-base sm:text-lg text-foreground leading-relaxed italic">
-                  "{testimonials[activeTestimonialIdx].quote}"
-                </p>
-
-                <div className="mt-6 pt-5 border-t border-border flex items-center justify-between">
-                  <div>
-                    <div className="font-display text-base font-medium text-crimson">
-                      {testimonials[activeTestimonialIdx].name}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {testimonials[activeTestimonialIdx].role}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() =>
-                        setActiveTestimonialIdx(
-                          (activeTestimonialIdx - 1 + testimonials.length) % testimonials.length
-                        )
-                      }
-                      className="p-2 rounded-md border border-border text-foreground hover:bg-muted transition cursor-pointer"
-                      aria-label="Previous testimonial"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() =>
-                        setActiveTestimonialIdx((activeTestimonialIdx + 1) % testimonials.length)
-                      }
-                      className="p-2 rounded-md border border-border text-foreground hover:bg-muted transition cursor-pointer"
-                      aria-label="Next testimonial"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Indicator Dots */}
-            <div className="flex items-center justify-center gap-2 mt-5">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveTestimonialIdx(idx)}
-                  className={`h-2 rounded-full transition-all duration-200 ${
-                    activeTestimonialIdx === idx ? "w-6 bg-crimson" : "w-2 bg-border hover:bg-gold-antique"
-                  }`}
-                  aria-label={`Go to testimonial ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. CONTACT SECTION */}
-      <section id="contact" className="py-24 bg-shadow text-ivory">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto">
-              <Eyebrow>Connect With Us</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-medium text-ivory sm:text-4xl">
-                Begin Your Journey Today
-              </h2>
-              <p className="mt-2 text-sm sm:text-base text-ivory/80">
-                Whether you're seeking inner peace, healing, or spiritual growth, we're here to guide you.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-5 space-y-6">
-              <Reveal delay={150}>
-                <div className="rounded-lg border border-gold/30 bg-shadow/80 p-7 backdrop-blur-sm space-y-5">
-                  <h3 className="font-display text-xl text-gold-light font-medium mb-4">Contact Details</h3>
-
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 bg-crimson/30 border border-gold/30 text-gold rounded-md">
-                      <Phone className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold">Phone</div>
-                      <div className="text-sm text-ivory mt-0.5">+91 98765 43210 / +91 87654 32109</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 bg-crimson/30 border border-gold/30 text-gold rounded-md">
-                      <Mail className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold">Email</div>
-                      <div className="text-sm text-ivory mt-0.5">info@yugalatapovan.org</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 bg-crimson/30 border border-gold/30 text-gold rounded-md">
-                      <MapPin className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold">Address</div>
-                      <div className="text-sm text-ivory mt-0.5">
-                        Yugala Radhe Krishna Tapovan Marg, Sacred Vrindavan Sanctuary Valley, India
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-gold/20">
-                    <div className="text-[11px] uppercase tracking-wider text-gold-light/80 font-semibold mb-3">
-                      Follow Our Sacred Journey
-                    </div>
-                    <div className="flex items-center gap-3 text-gold">
-                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="Instagram">
-                        <Instagram className="h-4 w-4" />
-                      </a>
-                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="YouTube">
-                        <Youtube className="h-4 w-4" />
-                      </a>
-                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="Facebook">
-                        <Facebook className="h-4 w-4" />
-                      </a>
-                      <a href="#" className="p-2 border border-gold/30 rounded-md hover:bg-gold hover:text-shadow transition" aria-label="WhatsApp">
-                        <MessageCircle className="h-4 w-4" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-7 space-y-6">
-              <Reveal delay={200}>
-                <div className="rounded-lg border border-gold/30 overflow-hidden h-[260px] relative shadow-md">
-                  <iframe
-                    title="Yugala Tapovan Location Map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14144.595089332152!2d77.69344445!3d27.57962255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736fcb27561f71%3A0xe9fb56f8f5333f28!2sVrindavan%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={false}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-              </Reveal>
-
-              <Reveal delay={250}>
-                <div className="rounded-lg border border-gold/40 bg-gradient-to-r from-crimson/30 to-shadow/90 p-7 text-center">
-                  <h3 className="font-display text-xl text-ivory mb-1 font-medium">Book a Consultation / Join a Program</h3>
-                  <p className="text-xs sm:text-sm text-ivory/80 mb-5">
-                    Connect directly with our spiritual guidance facilitators to reserve your seat or ask any questions.
-                  </p>
-                  <button
-                    onClick={() => handleOpenConsultation()}
-                    className="w-full rounded-md bg-gold hover:bg-gold-light text-shadow font-semibold py-3 px-6 text-xs uppercase tracking-[0.2em] transition cursor-pointer"
-                  >
-                    Book Consultation / Join Program
-                  </button>
-                </div>
-              </Reveal>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-gold/25 bg-shadow text-ivory py-12">
+      <footer className="border-t border-gold/30 bg-[#09070A] text-ivory py-14">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-5 space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+            {/* Left: Newsletter */}
+            <div className="lg:col-span-5 space-y-4">
               <div className="flex items-center gap-3">
                 <img
                   src="/Logo.jpeg"
                   alt="Yugala Radhe Krishna Tapovan Logo"
-                  className="h-10 w-10 rounded-full object-cover border border-gold/60"
+                  className="h-11 w-11 rounded-full object-cover border border-gold/70 shadow-gold"
                 />
                 <div className="font-display text-base tracking-[0.15em] text-gold-light font-medium">
                   YUGALA RADHE KRISHNA TAPOVAN
                 </div>
               </div>
-              <p className="text-xs text-ivory/70 max-w-sm leading-relaxed">
-                A sacred space dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by the eternal love of Radha and Krishna.
+
+              <p className="text-xs text-gold-light italic">
+                "Live in devotion. Serve with love. Awaken the soul."
               </p>
+
+              <div className="pt-2">
+                <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-2">
+                  Stay Connected
+                </div>
+                <p className="text-xs text-ivory/70 leading-relaxed mb-3">
+                  Receive spiritual updates, event information, inspiration, and retreat news from the Tapovan.
+                </p>
+                {subscribed ? (
+                  <div className="p-3 rounded border border-gold/50 bg-gold/15 text-xs text-gold font-semibold">
+                    Hari Om! Thank you for subscribing to our sacred updates.
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubscribe} className="flex gap-2">
+                    <input
+                      type="email"
+                      required
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="Your email address"
+                      className="rounded-md border border-gold/30 bg-[#160B1D] px-3.5 py-2 text-xs text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none w-full"
+                    />
+                    <button
+                      type="submit"
+                      className="rounded-md bg-gold px-4 py-2 text-xs uppercase font-bold tracking-wider text-[#160B1D] hover:bg-gold-light transition cursor-pointer shrink-0"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
 
+            {/* Quick Links */}
             <div className="lg:col-span-3 space-y-2">
               <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-3">Quick Links</div>
-              <ul className="space-y-1.5 text-xs text-ivory/80">
-                <li>
-                  <a href="#about" className="hover:text-gold transition">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#offerings" className="hover:text-gold transition">
-                    Offerings
-                  </a>
-                </li>
-                <li>
-                  <a href="#programs" className="hover:text-gold transition">
-                    Core Programs
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="hover:text-gold transition">
-                    Contact
-                  </a>
-                </li>
+              <ul className="space-y-2 text-xs text-ivory/80 font-sans">
+                <li><a href="#hero" className="hover:text-gold transition">Home</a></li>
+                <li><a href="#about" className="hover:text-gold transition">Our Tapovan</a></li>
+                <li><a href="#offerings" className="hover:text-gold transition">Experience</a></li>
+                <li><a href="#programs" className="hover:text-gold transition">Spiritual Journeys</a></li>
+                <li><a href="#celebrations" className="hover:text-gold transition">Celebrations</a></li>
+                <li><a href="#seva" className="hover:text-gold transition">Seva</a></li>
+                <li><a href="#store" className="hover:text-gold transition">Store</a></li>
+                <li><a href="#life" className="hover:text-gold transition">Gallery</a></li>
+                <li><a href="#contact" className="hover:text-gold transition">Contact</a></li>
               </ul>
             </div>
 
+            {/* Legal Links & Social */}
             <div className="lg:col-span-4 space-y-2">
               <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-3">Legal & Information</div>
-              <ul className="space-y-1.5 text-xs text-ivory/80">
+              <ul className="space-y-2 text-xs text-ivory/80 font-sans">
                 <li>
                   <button
                     onClick={() => setLegalType("privacy")}
@@ -1083,25 +1265,25 @@ export function IndexPage() {
                     onClick={() => setLegalType("refund")}
                     className="hover:text-gold transition text-left cursor-pointer"
                   >
-                    Refund Policy
+                    Refund & Cancellation Policy
                   </button>
                 </li>
               </ul>
 
-              <div className="pt-3 flex items-center gap-3 text-gold">
-                <a href="#" aria-label="Instagram" className="hover:text-ivory transition"><Instagram className="h-4 w-4" /></a>
-                <a href="#" aria-label="YouTube" className="hover:text-ivory transition"><Youtube className="h-4 w-4" /></a>
-                <a href="#" aria-label="Facebook" className="hover:text-ivory transition"><Facebook className="h-4 w-4" /></a>
-                <a href="#" aria-label="WhatsApp" className="hover:text-ivory transition"><MessageCircle className="h-4 w-4" /></a>
+              <div className="pt-4 flex items-center gap-3 text-gold">
+                <a href="#" aria-label="Instagram" className="p-2 border border-gold/30 rounded hover:bg-gold hover:text-[#160B1D] transition"><Instagram className="h-4 w-4" /></a>
+                <a href="#" aria-label="YouTube" className="p-2 border border-gold/30 rounded hover:bg-gold hover:text-[#160B1D] transition"><Youtube className="h-4 w-4" /></a>
+                <a href="#" aria-label="Facebook" className="p-2 border border-gold/30 rounded hover:bg-gold hover:text-[#160B1D] transition"><Facebook className="h-4 w-4" /></a>
+                <a href="#" aria-label="WhatsApp" className="p-2 border border-gold/30 rounded hover:bg-gold hover:text-[#160B1D] transition"><MessageCircle className="h-4 w-4" /></a>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 pt-6 border-t border-gold/20 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 gap-3">
+          <div className="mt-12 pt-6 border-t border-gold/20 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 gap-3">
             <div>
-              © {new Date().getFullYear()} Yugala Radhe Krishna Tapovan. All rights reserved.
+              © 2025 Yugala Radhe Krishna Tapovan. All Rights Reserved.
             </div>
-            <div className="text-gold-light/60 font-medium">
+            <div className="text-gold-light/80 font-medium tracking-widest font-serif">
               ॥ Radhe Radhe · Hare Krishna ॥
             </div>
           </div>

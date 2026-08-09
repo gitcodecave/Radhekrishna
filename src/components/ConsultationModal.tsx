@@ -36,16 +36,16 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleReset()}>
-      <DialogContent className="max-w-md border-gold/40 bg-shadow text-ivory backdrop-blur-xl">
+      <DialogContent className="max-w-md border-gold/40 bg-[#21102A] text-ivory backdrop-blur-xl shadow-2xl">
         <DialogHeader>
-          <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-gold">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-medium">
             <Sparkles className="h-4 w-4 text-gold" />
             <span>Yugala Spiritual Sanctuary</span>
           </div>
-          <DialogTitle className="font-display text-2xl font-light text-ivory">
+          <DialogTitle className="font-display text-2xl font-normal text-ivory">
             {submitted ? "Blessings & Gratitude" : "Book a Consultation / Join a Program"}
           </DialogTitle>
-          <DialogDescription className="text-ivory/70 font-serif">
+          <DialogDescription className="text-ivory/70 font-sans text-xs sm:text-sm">
             {submitted
               ? "Your request has been received. Our spiritual guidance team will connect with you shortly."
               : "Begin your journey towards inner peace, devotion, and Krishna Consciousness."}
@@ -54,16 +54,16 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
 
         {submitted ? (
           <div className="py-6 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gold/20 text-gold border border-gold/50">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gold/15 text-gold border border-gold/50">
               <CheckCircle2 className="h-10 w-10 text-gold" />
             </div>
             <h3 className="font-display text-lg text-ivory mb-2">Hari Om! Submission Successful</h3>
-            <p className="text-sm font-serif text-ivory/80 mb-6">
+            <p className="text-sm font-sans text-ivory/80 mb-6">
               Thank you, <span className="text-gold font-semibold">{formData.name || "Seeker"}</span>. We look forward to guiding you on the program: <span className="italic text-gold">{formData.program}</span>.
             </p>
             <button
               onClick={handleReset}
-              className="w-full bg-gold hover:bg-gold-light text-shadow font-semibold py-3 px-6 text-xs uppercase tracking-widest transition duration-300"
+              className="w-full bg-gold hover:bg-gold-light text-[#160B1D] font-bold py-3 px-6 text-xs uppercase tracking-[0.2em] transition duration-300 rounded-md cursor-pointer"
             >
               Close Window
             </button>
@@ -71,7 +71,7 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 pt-2">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1">
+              <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1 font-semibold">
                 Full Name *
               </label>
               <input
@@ -80,13 +80,13 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Your full name"
-                className="w-full rounded-none border border-gold/30 bg-shadow/60 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
+                className="w-full rounded-md border border-gold/30 bg-[#160B1D]/80 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1">
+                <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1 font-semibold">
                   Email Address *
                 </label>
                 <input
@@ -95,11 +95,11 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="your.email@example.com"
-                  className="w-full rounded-none border border-gold/30 bg-shadow/60 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
+                  className="w-full rounded-md border border-gold/30 bg-[#160B1D]/80 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1">
+                <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1 font-semibold">
                   Phone Number *
                 </label>
                 <input
@@ -108,33 +108,35 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="+91 98765 43210"
-                  className="w-full rounded-none border border-gold/30 bg-shadow/60 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
+                  className="w-full rounded-md border border-gold/30 bg-[#160B1D]/80 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1">
+              <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1 font-semibold">
                 Select Program or Offering
               </label>
               <select
                 value={formData.program}
                 onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-                className="w-full rounded-none border border-gold/30 bg-shadow/80 px-4 py-2.5 text-sm text-ivory focus:border-gold focus:outline-none"
+                className="w-full rounded-md border border-gold/30 bg-[#160B1D] px-4 py-2.5 text-sm text-ivory focus:border-gold focus:outline-none"
               >
-                <option value="7-Day Inner Transformation Retreat" className="bg-shadow text-ivory">7-Day Inner Transformation Retreat</option>
-                <option value="Weekend Spiritual Retreat" className="bg-shadow text-ivory">Weekend Spiritual Retreat</option>
-                <option value="Kids Gurukulam" className="bg-shadow text-ivory">Kids Gurukulam</option>
-                <option value="Healing & Meditation Programs" className="bg-shadow text-ivory">Healing & Meditation Programs</option>
-                <option value="Bhagavad Gita Learning" className="bg-shadow text-ivory">Bhagavad Gita Learning</option>
-                <option value="Yoga & Pranayama" className="bg-shadow text-ivory">Yoga & Pranayama</option>
-                <option value="Spiritual Consultation" className="bg-shadow text-ivory">Personal Spiritual Consultation</option>
-                <option value="Facilitator Training" className="bg-shadow text-ivory">Facilitator Training</option>
+                <option value="7-Day Inner Transformation Retreat" className="bg-[#160B1D] text-ivory">7-Day Inner Transformation Retreat</option>
+                <option value="Weekend Spiritual Retreat" className="bg-[#160B1D] text-ivory">Weekend Spiritual Retreat</option>
+                <option value="Kids Gurukulam" className="bg-[#160B1D] text-ivory">Kids Gurukulam</option>
+                <option value="Healing & Meditation Programs" className="bg-[#160B1D] text-ivory">Healing & Meditation Programs</option>
+                <option value="Bhagavad Gita Learning" className="bg-[#160B1D] text-ivory">Bhagavad Gita Learning</option>
+                <option value="Yoga & Pranayama" className="bg-[#160B1D] text-ivory">Yoga & Pranayama</option>
+                <option value="Spiritual Consultation" className="bg-[#160B1D] text-ivory">Personal Spiritual Consultation</option>
+                <option value="Facilitator Training" className="bg-[#160B1D] text-ivory">Facilitator Training</option>
+                <option value="Community Seva" className="bg-[#160B1D] text-ivory">Join Community Seva</option>
+                <option value="Sacred Boutique Inquiry" className="bg-[#160B1D] text-ivory">Spiritual Boutique Item Inquiry</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1">
+              <label className="block text-xs uppercase tracking-wider text-gold-light/90 mb-1 font-semibold">
                 Message / Spiritual Goal
               </label>
               <textarea
@@ -142,13 +144,13 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Share your intentions or any specific questions..."
-                className="w-full rounded-none border border-gold/30 bg-shadow/60 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
+                className="w-full rounded-md border border-gold/30 bg-[#160B1D]/80 px-4 py-2.5 text-sm text-ivory placeholder-ivory/40 focus:border-gold focus:outline-none"
               />
             </div>
 
             <button
               type="submit"
-              className="mt-2 w-full bg-gold hover:bg-gold-light text-shadow font-semibold py-3 px-6 text-xs uppercase tracking-[0.25em] transition duration-300 shadow-gold"
+              className="mt-2 w-full bg-gold hover:bg-gold-light text-[#160B1D] font-bold py-3.5 px-6 text-xs uppercase tracking-[0.25em] transition duration-300 rounded-md cursor-pointer shadow-gold"
             >
               Submit Booking Request
             </button>
@@ -158,3 +160,4 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
     </Dialog>
   );
 }
+

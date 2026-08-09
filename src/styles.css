@@ -9,6 +9,12 @@
   --font-serif: "Marcellus", serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
 
+  --color-krishna-plum: #160B1D;
+  --color-royal-plum: #21102A;
+  --color-dark-purple: #2B1235;
+  --color-secondary-purple: #351744;
+  --color-deep-shadow: #09070A;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ivory: var(--ivory);
@@ -23,8 +29,8 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-primary: var(--crimson);
-  --color-primary-foreground: var(--ivory);
+  --color-primary: var(--gold);
+  --color-primary-foreground: var(--krishna-plum);
   --color-accent: var(--gold);
   --color-accent-foreground: var(--shadow);
   --color-card: var(--card);
@@ -40,7 +46,13 @@
 }
 
 :root {
-  --radius: 0.375rem;
+  --radius: 0.5rem;
+
+  --krishna-plum: #160B1D;
+  --royal-plum: #21102A;
+  --dark-purple: #2B1235;
+  --secondary-purple: #351744;
+  --deep-shadow: #09070A;
 
   --ivory: #FAF6EF;
   --ivory-soft: #F4EBE0;
@@ -51,20 +63,20 @@
   --gold-antique: #9E742A;
   --gold-light: #DFB85C;
   --brown: #45240F;
-  --shadow: #1F0D08;
+  --shadow: #09070A;
 
-  --background: #FAF6EF;
-  --foreground: #231916;
-  --card: #FFFFFF;
-  --muted: #F2E8DC;
-  --muted-foreground: #5C4F4A;
-  --border: rgba(197, 155, 39, 0.22);
+  --background: #160B1D;
+  --foreground: #FAF6EF;
+  --card: #21102A;
+  --muted: #2B1235;
+  --muted-foreground: #DFB85C;
+  --border: rgba(197, 155, 39, 0.28);
 
-  --gradient-sacred: linear-gradient(135deg, #540000 0%, #7A0000 45%, #C86D00 85%, #C59B27 100%);
+  --gradient-sacred: linear-gradient(135deg, #2B1235 0%, #7A0000 45%, #C86D00 85%, #C59B27 100%);
   --gradient-gold: linear-gradient(135deg, #9E742A 0%, #C59B27 50%, #DFB85C 100%);
-  --gradient-ember: radial-gradient(ellipse at top, #C86D00 0%, #7A0000 50%, #1F0D08 100%);
-  --shadow-sacred: 0 20px 50px -10px rgba(31, 13, 8, 0.35);
-  --shadow-gold: 0 4px 20px rgba(197, 155, 39, 0.2);
+  --gradient-ember: radial-gradient(ellipse at top, #C86D00 0%, #7A0000 50%, #160B1D 100%);
+  --shadow-sacred: 0 20px 50px -10px rgba(9, 7, 10, 0.7);
+  --shadow-gold: 0 4px 25px rgba(197, 155, 39, 0.25);
 }
 
 @layer base {
@@ -74,14 +86,17 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
+    background-color: var(--background);
+    color: var(--foreground);
   }
   body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
@@ -89,8 +104,8 @@
     font-weight: 500;
   }
   ::selection {
-    background: var(--crimson);
-    color: var(--ivory);
+    background: var(--gold);
+    color: var(--krishna-plum);
   }
 }
 
@@ -109,9 +124,20 @@
   background: var(--gradient-ember);
 }
 
+@utility bg-vrindavan-dusk {
+  background: radial-gradient(circle at 50% 0%, rgba(197, 155, 39, 0.12), transparent 45%),
+              linear-gradient(180deg, #160B1D 0%, #21102A 50%, #09070A 100%);
+}
+
+@utility bg-plum-card {
+  background-color: #21102A;
+  border: 1px solid rgba(197, 155, 39, 0.28);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
 @utility gold-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, #C59B27, transparent);
 }
 
 @keyframes fadeUp {
@@ -122,3 +148,13 @@
 @utility anim-fade-up {
   animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+@utility anim-slow-zoom {
+  animation: slowZoom 20s ease-out infinite alternate;
+}
+
