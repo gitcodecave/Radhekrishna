@@ -196,17 +196,17 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <a href="#hero" className="flex items-center gap-3 group">
+        <a href="#hero" className="flex items-center gap-3.5 group">
           <img
             src="/Logo.jpeg"
             alt="Radhe Krishna Tapovan Logo"
-            className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border border-gold/70 transition duration-300 group-hover:border-gold shadow-gold"
+            className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl object-cover border-2 border-[#D49D44] transition duration-300 group-hover:border-[#A9691C] shadow-md shrink-0"
           />
           <div className="leading-tight">
-            <span className="font-display text-sm tracking-[0.18em] text-[#2B1208] group-hover:text-gold transition font-medium block">
+            <span className="font-display text-sm sm:text-base tracking-[0.18em] text-[#2B1208] group-hover:text-gold transition font-medium block">
               RADHE KRISHNA TAPOVAN
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-[#4B301B]/70 block">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-[#4B301B]/70 block">
               Spiritual Sanctuary
             </span>
           </div>
@@ -230,25 +230,39 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
         <div className="hidden items-center gap-4 md:flex">
           <button
             onClick={() => onOpenConsultation("General Sanctuary Visit")}
-            className="rounded-md bg-[#D49D44] hover:bg-[#A9691C] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#2B1208] transition duration-200 cursor-pointer shadow-sm"
+            className="btn-red-glossy-3d rounded-lg px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
           >
             Plan Your Visit
           </button>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Animated Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 text-[#4B301B] lg:hidden focus:outline-none"
+          className="relative p-2 text-[#4B301B] lg:hidden focus:outline-none flex flex-col items-center justify-center gap-1.5 h-11 w-11 rounded-xl border-2 border-[#D49D44]/40 bg-[#FFFDF8] shadow-sm hover:border-[#D49D44] transition cursor-pointer"
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <span
+            className={`h-0.5 w-6 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
+              mobileMenuOpen ? "rotate-45 translate-y-[8px]" : ""
+            }`}
+          />
+          <span
+            className={`h-0.5 w-6 bg-[#4B301B] rounded-full transition-all duration-300 ${
+              mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
+            }`}
+          />
+          <span
+            className={`h-0.5 w-6 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
+              mobileMenuOpen ? "-rotate-45 -translate-y-[8px]" : ""
+            }`}
+          />
         </button>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-[#A9691C]/20 bg-[#FFFDF8]/98 px-6 py-6 backdrop-blur-xl lg:hidden">
+        <div className="border-b border-[#A9691C]/20 bg-[#FFFDF8]/98 px-6 py-6 backdrop-blur-xl lg:hidden animate-in fade-in slide-in-from-top-4 duration-300">
           <nav className="flex flex-col gap-3 text-center">
             {navLinks.map((link) => (
               <a
@@ -265,7 +279,7 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
                 setMobileMenuOpen(false);
                 onOpenConsultation("General Sanctuary Visit");
               }}
-              className="mt-3 w-full rounded-md bg-[#D49D44] py-3 text-xs uppercase tracking-[0.2em] text-[#2B1208] font-bold shadow-sm"
+              className="mt-3 w-full btn-red-glossy-3d py-3 text-xs uppercase tracking-[0.2em] font-bold rounded-lg"
             >
               Plan Your Visit
             </button>
@@ -344,7 +358,7 @@ export function IndexPage() {
             </Reveal>
 
             <Reveal delay={100}>
-              <h1 className="font-display text-4xl font-normal leading-[1.12] text-[#2B1208] sm:text-5xl lg:text-6xl tracking-tight">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.12] text-gradient-red-glossy tracking-tight">
                 Welcome to Radhe Krishna Tapovan
               </h1>
             </Reveal>
@@ -359,18 +373,18 @@ export function IndexPage() {
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => handleOpenConsultation("Begin Your Journey")}
-                  className="inline-flex items-center gap-2.5 rounded-md bg-[#D49D44] hover:bg-[#A9691C] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#2B1208] transition duration-300 cursor-pointer shadow-sm"
+                  className="btn-red-glossy-3d inline-flex items-center gap-2.5 rounded-lg px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] cursor-pointer"
                 >
                   <span>Begin Your Journey</span>
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 text-[#FFF8E8]" />
                 </button>
 
                 <a
                   href="#about"
-                  className="inline-flex items-center gap-2 rounded-md border border-[#D49D44] bg-[#FFFFFF] backdrop-blur-sm px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#4B301B] transition duration-300 hover:bg-[#FFF8E8]"
+                  className="btn-red-outline-3d inline-flex items-center gap-2 rounded-lg px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
                 >
                   <span>Our Tapovan</span>
-                  <ArrowUpRight className="h-4 w-4 text-[#D49D44]" />
+                  <ArrowUpRight className="h-4 w-4 text-[#8C1414]" />
                 </a>
               </div>
             </Reveal>
@@ -491,7 +505,7 @@ export function IndexPage() {
               {
                 title: "Love like Radha",
                 desc: "Let love become the foundation of every relationship.",
-                icon: Heart,
+                icon: Flower2,
               },
               {
                 title: "Live with Krishna Consciousness",
@@ -952,7 +966,7 @@ export function IndexPage() {
                   <img
                     src={founderImg}
                     alt="Sri Krishna Abhirra portrait"
-                    className="w-full h-[440px] object-cover"
+                    className="w-full h-[440px] object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8] via-transparent to-transparent" />
                 </div>
@@ -1179,7 +1193,7 @@ export function IndexPage() {
                 <img
                   src="/Logo.jpeg"
                   alt="Radhe Krishna Tapovan Logo"
-                  className="h-11 w-11 rounded-full object-cover border border-gold/70 shadow-gold"
+                  className="h-14 w-14 rounded-xl object-cover border-2 border-[#D49D44] shadow-md shrink-0"
                 />
                 <div className="font-display text-base tracking-[0.15em] text-[#EEC87B] font-medium">
                   RADHE KRISHNA TAPOVAN

@@ -34,7 +34,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         <img
           src="/Logo.jpeg"
           alt="Radhe Krishna Tapovan Logo"
-          className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border border-gold/70 shadow-md mb-4"
+          className="h-24 w-24 sm:h-28 sm:w-28 rounded-xl object-cover border-2 border-[#D49D44] shadow-lg mb-5"
         />
         <h1 className="font-display text-lg tracking-[0.2em] text-[#2B1208] font-medium">
           RADHE KRISHNA TAPOVAN
