@@ -230,7 +230,7 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
         <div className="hidden items-center gap-4 md:flex">
           <button
             onClick={() => onOpenConsultation("General Sanctuary Visit")}
-            className="btn-red-glossy-3d rounded-lg px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
+            className="btn-red-luxury rounded-md px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
           >
             Plan Your Visit
           </button>
@@ -239,22 +239,22 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
         {/* Animated Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="relative p-2 text-[#4B301B] lg:hidden focus:outline-none flex flex-col items-center justify-center gap-1.5 h-11 w-11 rounded-xl border-2 border-[#D49D44]/40 bg-[#FFFDF8] shadow-sm hover:border-[#D49D44] transition cursor-pointer"
+          className="relative text-[#4B301B] lg:hidden focus:outline-none flex flex-col items-center justify-center gap-1.5 h-9 w-9 border-none bg-transparent shadow-none p-1 transition cursor-pointer"
           aria-label="Toggle menu"
         >
           <span
-            className={`h-0.5 w-6 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
-              mobileMenuOpen ? "rotate-45 translate-y-[8px]" : ""
+            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
+              mobileMenuOpen ? "rotate-45 translate-y-[6.5px]" : ""
             }`}
           />
           <span
-            className={`h-0.5 w-6 bg-[#4B301B] rounded-full transition-all duration-300 ${
+            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 ${
               mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
             }`}
           />
           <span
-            className={`h-0.5 w-6 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
-              mobileMenuOpen ? "-rotate-45 -translate-y-[8px]" : ""
+            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
+              mobileMenuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
             }`}
           />
         </button>
@@ -279,7 +279,7 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
                 setMobileMenuOpen(false);
                 onOpenConsultation("General Sanctuary Visit");
               }}
-              className="mt-3 w-full btn-red-glossy-3d py-3 text-xs uppercase tracking-[0.2em] font-bold rounded-lg"
+              className="mt-3 w-full btn-red-luxury py-3 text-xs uppercase tracking-[0.2em] font-semibold rounded-md"
             >
               Plan Your Visit
             </button>
@@ -290,46 +290,39 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
   );
 }
 
-/* -------- Main Single Page Component -------- */
-export function IndexPage() {
+
+
+/* -------- Main Index Page Component -------- */
+export default function IndexPage() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | undefined>();
   const [legalType, setLegalType] = useState<"privacy" | "terms" | "refund" | null>(null);
-  const [galleryModalIdx, setGalleryModalIdx] = useState<number | null>(null);
-  const [subscribed, setSubscribed] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
-  const handleOpenConsultation = (programName?: string) => {
-    setSelectedProgram(programName);
+  const handleOpenConsultation = (program?: string) => {
+    setSelectedProgram(program);
     setConsultationOpen(true);
+  };
+
+  const handleOpenGallery = (index: number) => {
+    setGalleryIndex(index);
+    setGalleryOpen(true);
   };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (newsletterEmail) {
       setSubscribed(true);
-      setTimeout(() => {
-        setSubscribed(false);
-        setNewsletterEmail("");
-      }, 4000);
+      setNewsletterEmail("");
     }
   };
 
-  const galleryItems = [
-    { title: "Ashram Sanctuary Grounds", img: galleryAshram, caption: "Peaceful Temple Gardens & Tulsi Groves" },
-    { title: "Meditation Hall", img: galleryMeditation, caption: "Guided Meditation & Sacred Inner Silence" },
-    { title: "Retreat Sanctuary", img: tapovanImg, caption: "Transformative Spiritual Retreats surrounded by Nature" },
-    { title: "Wisdom Circle", img: diyaImg, caption: "Interactive Vedic Learning & Bhagavad Gita Discourses" },
-    { title: "Krishna Temple Altar", img: galleryTemple, caption: "Divine Radha Krishna Temple Shrine & Daily Arati" },
-    { title: "Sound & Energy Healing", img: galleryHealing, caption: "Holistic Vibration & Energy Realignment" },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#FFFDF8] text-[#2B1208] font-sans antialiased selection:bg-gold selection:text-[#2B1208] overflow-x-hidden">
-      {/* Entrance Screen */}
+    <div className="min-h-screen bg-[#FFFDF8] text-[#2B1208] selection:bg-[#D49D44]/30">
       <LoadingScreen />
-
-      {/* Sticky Navigation */}
       <Navigation onOpenConsultation={handleOpenConsultation} />
 
       {/* 01. HOME (HERO & 5 PILLARS) */}
@@ -358,7 +351,7 @@ export function IndexPage() {
             </Reveal>
 
             <Reveal delay={100}>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.12] text-gradient-red-glossy tracking-tight">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.12] text-gradient-red-luxury tracking-tight">
                 Welcome to Radhe Krishna Tapovan
               </h1>
             </Reveal>
@@ -373,18 +366,18 @@ export function IndexPage() {
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => handleOpenConsultation("Begin Your Journey")}
-                  className="btn-red-glossy-3d inline-flex items-center gap-2.5 rounded-lg px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] cursor-pointer"
+                  className="btn-red-luxury inline-flex items-center gap-2.5 rounded-md px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
                 >
                   <span>Begin Your Journey</span>
-                  <ChevronRight className="h-4 w-4 text-[#FFF8E8]" />
+                  <ChevronRight className="h-4 w-4 text-[#FFFDF8]" />
                 </button>
 
                 <a
                   href="#about"
-                  className="btn-red-outline-3d inline-flex items-center gap-2 rounded-lg px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
+                  className="btn-red-luxury-outline inline-flex items-center gap-2 rounded-md px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
                 >
                   <span>Our Tapovan</span>
-                  <ArrowUpRight className="h-4 w-4 text-[#8C1414]" />
+                  <ArrowUpRight className="h-4 w-4 text-[#7A1717]" />
                 </a>
               </div>
             </Reveal>
