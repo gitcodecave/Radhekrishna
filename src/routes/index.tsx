@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import tapovanImg from "@/assets/tapovan.jpg";
+import founderImg from "@/assets/founder.jpg";
 import diyaImg from "@/assets/diya.jpg";
 import fluteImg from "@/assets/flute.jpg";
 import rasaImg from "@/assets/rasa.jpg";
@@ -949,7 +950,7 @@ export function IndexPage() {
               <Reveal>
                 <div className="relative rounded-xl overflow-hidden border border-[#A9691C]/20 shadow-xl">
                   <img
-                    src={diyaImg}
+                    src={founderImg}
                     alt="Sri Krishna Abhirra portrait"
                     className="w-full h-[440px] object-cover"
                   />
