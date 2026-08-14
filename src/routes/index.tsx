@@ -196,20 +196,12 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <a href="#hero" className="flex items-center gap-3.5 group">
+        <a href="#hero" className="group flex items-center shrink-0">
           <img
             src="/Logo.jpeg"
             alt="Radhe Krishna Tapovan Logo"
-            className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl object-cover border-2 border-[#D49D44] transition duration-300 group-hover:border-[#A9691C] shadow-md shrink-0"
+            className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl object-cover border-2 border-[#D49D44] bg-[#FFFFFF] p-0.5 shadow-[0_6px_25px_rgba(212,157,68,0.35)] group-hover:shadow-[0_8px_30px_rgba(212,157,68,0.5)] group-hover:scale-105 transition-all duration-300 transform shrink-0"
           />
-          <div className="leading-tight">
-            <span className="font-display text-sm sm:text-base tracking-[0.18em] text-[#2B1208] group-hover:text-gold transition font-medium block">
-              RADHE KRISHNA TAPOVAN
-            </span>
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-[#4B301B]/70 block">
-              Spiritual Sanctuary
-            </span>
-          </div>
         </a>
 
         {/* Desktop Navigation Links */}
