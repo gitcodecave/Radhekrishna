@@ -333,7 +333,7 @@ export default function IndexPage() {
           <img
             src={heroImg}
             alt="Radha Krishna Sanctuary"
-            className="h-full w-full object-cover object-right sm:object-center opacity-60 anim-slow-zoom"
+            className="h-full w-full object-cover object-[75%_center] opacity-60 anim-slow-zoom"
           />
           <div className="absolute inset-0 bg-radial from-transparent via-[#FFFDF8]/40 to-[#FFFDF8]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8] via-[#FFFDF8]/30 to-transparent" />
