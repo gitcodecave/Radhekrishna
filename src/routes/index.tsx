@@ -297,10 +297,18 @@ export default function IndexPage() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | undefined>();
   const [legalType, setLegalType] = useState<"privacy" | "terms" | "refund" | null>(null);
-  const [galleryOpen, setGalleryOpen] = useState(false);
-  const [galleryIndex, setGalleryIndex] = useState(0);
+  const [galleryModalIdx, setGalleryModalIdx] = useState<number | null>(null);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  const galleryItems = [
+    { title: "Ashram Sanctuary Grounds", img: galleryAshram, caption: "Peaceful Temple Gardens & Tulsi Groves" },
+    { title: "Meditation Hall", img: galleryMeditation, caption: "Guided Meditation & Sacred Inner Silence" },
+    { title: "Retreat Sanctuary", img: tapovanImg, caption: "Transformative Spiritual Retreats surrounded by Nature" },
+    { title: "Wisdom Circle", img: diyaImg, caption: "Interactive Vedic Learning & Bhagavad Gita Discourses" },
+    { title: "Krishna Temple Altar", img: galleryTemple, caption: "Divine Radha Krishna Temple Shrine & Daily Arati" },
+    { title: "Sound & Energy Healing", img: galleryHealing, caption: "Holistic Vibration & Energy Realignment" },
+  ];
 
   const handleOpenConsultation = (program?: string) => {
     setSelectedProgram(program);
@@ -308,8 +316,7 @@ export default function IndexPage() {
   };
 
   const handleOpenGallery = (index: number) => {
-    setGalleryIndex(index);
-    setGalleryOpen(true);
+    setGalleryModalIdx(index);
   };
 
   const handleSubscribe = (e: React.FormEvent) => {
