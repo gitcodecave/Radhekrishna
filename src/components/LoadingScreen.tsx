@@ -26,20 +26,20 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-shadow text-ivory transition-opacity duration-500 ease-out ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FFFDF8] text-[#2B1208] transition-opacity duration-500 ease-out ${
         fadeOut ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
       <div className="relative z-10 flex flex-col items-center px-6 text-center">
         <img
           src="/Logo.jpeg"
-          alt="Yugala Radhe Krishna Tapovan Logo"
+          alt="Radhe Krishna Tapovan Logo"
           className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border border-gold/70 shadow-md mb-4"
         />
-        <h1 className="font-display text-lg tracking-[0.2em] text-gold-light font-medium">
-          YUGALA RADHE KRISHNA TAPOVAN
+        <h1 className="font-display text-lg tracking-[0.2em] text-[#2B1208] font-medium">
+          RADHE KRISHNA TAPOVAN
         </h1>
-        <p className="text-xs uppercase tracking-[0.25em] text-ivory/60 mt-1">
+        <p className="text-xs uppercase tracking-[0.25em] text-[#A9691C] mt-1">
           ॥ Radhe Radhe · Hare Krishna ॥
         </p>
       </div>

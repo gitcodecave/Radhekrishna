@@ -73,10 +73,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Yugala Radhe Krishna Tapovan — Experience Divine Love & Inner Transformation" },
+      { title: "Radhe Krishna Tapovan — Experience Divine Love & Inner Transformation" },
       { name: "description", content: "A spiritual sanctuary dedicated to meditation, healing, Krishna Consciousness, and holistic transformation inspired by the eternal love of Radha and Krishna." },
-      { name: "author", content: "Yugala Radhe Krishna Tapovan" },
-      { property: "og:title", content: "Yugala Radhe Krishna Tapovan — Experience Divine Love" },
+      { name: "author", content: "Radhe Krishna Tapovan" },
+      { property: "og:title", content: "Radhe Krishna Tapovan — Experience Divine Love" },
       { property: "og:description", content: "A spiritual sanctuary dedicated to meditation, healing, Krishna Consciousness, and holistic transformation." },
       { property: "og:image", content: "/Logo.jpeg" },
       { property: "og:type", content: "website" },

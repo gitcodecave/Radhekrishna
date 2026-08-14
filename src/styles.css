@@ -9,11 +9,11 @@
   --font-serif: "Marcellus", serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
 
-  --color-krishna-plum: #160B1D;
-  --color-royal-plum: #21102A;
-  --color-dark-purple: #2B1235;
-  --color-secondary-purple: #351744;
-  --color-deep-shadow: #09070A;
+  --color-krishna-plum: #FFFDF8;
+  --color-royal-plum: #FFFFFF;
+  --color-dark-purple: #FFF8E8;
+  --color-secondary-purple: #FAECBC;
+  --color-deep-shadow: #2B1208;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -30,9 +30,9 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-primary: var(--gold);
-  --color-primary-foreground: var(--krishna-plum);
+  --color-primary-foreground: #2B1208;
   --color-accent: var(--gold);
-  --color-accent-foreground: var(--shadow);
+  --color-accent-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--foreground);
   --color-ring: var(--gold);
@@ -48,35 +48,36 @@
 :root {
   --radius: 0.5rem;
 
-  --krishna-plum: #160B1D;
-  --royal-plum: #21102A;
-  --dark-purple: #2B1235;
-  --secondary-purple: #351744;
-  --deep-shadow: #09070A;
+  /* Divine White Palette Mappings */
+  --krishna-plum: #FFFDF8;
+  --royal-plum: #FFFFFF;
+  --dark-purple: #FFF8E8;
+  --secondary-purple: #FAECBC;
+  --deep-shadow: #2B1208;
 
-  --ivory: #FAF6EF;
-  --ivory-soft: #F4EBE0;
-  --crimson: #7A0000;
-  --maroon: #540000;
-  --saffron: #C86D00;
-  --gold: #C59B27;
-  --gold-antique: #9E742A;
-  --gold-light: #DFB85C;
-  --brown: #45240F;
-  --shadow: #09070A;
+  --ivory: #FFFDF8;
+  --ivory-soft: #FFF8E8;
+  --crimson: #783B0B;
+  --maroon: #2B1208;
+  --saffron: #D49D44;
+  --gold: #D49D44;
+  --gold-antique: #A9691C;
+  --gold-light: #EEC87B;
+  --brown: #4B301B;
+  --shadow: rgba(75, 48, 27, 0.07);
 
-  --background: #160B1D;
-  --foreground: #FAF6EF;
-  --card: #21102A;
-  --muted: #2B1235;
-  --muted-foreground: #DFB85C;
-  --border: rgba(197, 155, 39, 0.28);
+  --background: #FFFDF8;
+  --foreground: #2B1208;
+  --card: #FFFFFF;
+  --muted: #FFF8E8;
+  --muted-foreground: #957C62;
+  --border: rgba(169, 105, 28, 0.20);
 
-  --gradient-sacred: linear-gradient(135deg, #2B1235 0%, #7A0000 45%, #C86D00 85%, #C59B27 100%);
-  --gradient-gold: linear-gradient(135deg, #9E742A 0%, #C59B27 50%, #DFB85C 100%);
-  --gradient-ember: radial-gradient(ellipse at top, #C86D00 0%, #7A0000 50%, #160B1D 100%);
-  --shadow-sacred: 0 20px 50px -10px rgba(9, 7, 10, 0.7);
-  --shadow-gold: 0 4px 25px rgba(197, 155, 39, 0.25);
+  --gradient-sacred: linear-gradient(135deg, #FFFDF8 0%, #FFF8E8 55%, #FAECBC 100%);
+  --gradient-gold: linear-gradient(135deg, #EEC87B 0%, #D49D44 60%, #A9691C 100%);
+  --gradient-ember: radial-gradient(ellipse at top, #EEC87B 0%, #D49D44 50%, #FFFDF8 100%);
+  --shadow-sacred: 0 8px 30px rgba(75, 48, 27, 0.07);
+  --shadow-gold: 0 4px 20px rgba(212, 157, 68, 0.18);
 }
 
 @layer base {
@@ -102,15 +103,16 @@
     font-family: var(--font-display);
     letter-spacing: 0.02em;
     font-weight: 500;
+    color: #2B1208;
   }
   ::selection {
     background: var(--gold);
-    color: var(--krishna-plum);
+    color: #2B1208;
   }
 }
 
 @utility text-gradient-gold {
-  background: linear-gradient(135deg, #DFB85C 0%, #C59B27 60%, #9E742A 100%);
+  background: linear-gradient(135deg, #A9691C 0%, #D49D44 50%, #783B0B 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -125,19 +127,34 @@
 }
 
 @utility bg-vrindavan-dusk {
-  background: radial-gradient(circle at 50% 0%, rgba(197, 155, 39, 0.12), transparent 45%),
-              linear-gradient(180deg, #160B1D 0%, #21102A 50%, #09070A 100%);
+  background: radial-gradient(circle at 70% 30%, rgba(238, 200, 123, 0.18), transparent 40%),
+              linear-gradient(180deg, #FFFDF8 0%, #FFF8E8 100%);
+}
+
+@utility bg-divine-dawn {
+  background: radial-gradient(circle at 70% 30%, rgba(238, 200, 123, 0.18), transparent 40%),
+              linear-gradient(180deg, #FFFDF8 0%, #FFF8E8 100%);
 }
 
 @utility bg-plum-card {
-  background-color: #21102A;
-  border: 1px solid rgba(197, 155, 39, 0.28);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  background-color: #FFFFFF;
+  border: 1px solid rgba(169, 105, 28, 0.20);
+  box-shadow: 0 8px 30px rgba(75, 48, 27, 0.07);
+}
+
+@utility bg-light-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(169, 105, 28, 0.20);
+  box-shadow: 0 8px 30px rgba(75, 48, 27, 0.07);
+}
+
+@utility bg-dark-feature {
+  background: linear-gradient(135deg, #2B1208 0%, #4B301B 60%, #783B0B 100%);
 }
 
 @utility gold-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #C59B27, transparent);
+  background: linear-gradient(90deg, transparent, #D49D44, transparent);
 }
 
 @keyframes fadeUp {
@@ -157,4 +174,6 @@
 @utility anim-slow-zoom {
   animation: slowZoom 20s ease-out infinite alternate;
 }
+
+
 
