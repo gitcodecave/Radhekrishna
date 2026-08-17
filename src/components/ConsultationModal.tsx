@@ -42,7 +42,7 @@ export function ConsultationModal({ isOpen, onClose, defaultProgram }: Consultat
             <Flower2 className="h-4 w-4 text-[#D49D44]" />
             <span>Radhe Krishna Spiritual Sanctuary</span>
           </div>
-          <DialogTitle className="font-display text-2xl font-normal text-[#2B1208]">
+          <DialogTitle className="font-display text-2xl font-normal text-[#7A1717]">
             {submitted ? "Blessings & Gratitude" : "Book a Consultation / Join a Program"}
           </DialogTitle>
           <DialogDescription className="text-[#4B301B] font-sans text-xs sm:text-sm">

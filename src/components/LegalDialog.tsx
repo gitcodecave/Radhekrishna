@@ -79,7 +79,7 @@ export function LegalDialog({ type, onClose }: LegalDialogProps) {
     <Dialog open={!!type} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-w-lg border-[#A9691C]/20 bg-[#FFFFFF] text-[#2B1208] backdrop-blur-xl">
         <DialogHeader>
-          <DialogTitle className="font-display text-2xl text-[#2B1208]">{current.title}</DialogTitle>
+          <DialogTitle className="font-display text-2xl text-[#7A1717]">{current.title}</DialogTitle>
           <DialogDescription className="text-[#A9691C] font-serif text-xs uppercase tracking-widest">
             {current.subtitle}
           </DialogDescription>

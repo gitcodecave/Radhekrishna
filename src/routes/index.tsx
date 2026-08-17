@@ -10,6 +10,14 @@ import galleryAshram from "@/assets/gallery_ashram_1785922735991.png";
 import galleryMeditation from "@/assets/gallery_meditation_1785922755761.png";
 import galleryTemple from "@/assets/gallery_krishna_temple_1785922768852.png";
 import galleryHealing from "@/assets/gallery_healing_1785922782557.png";
+import cardBhajansKirtan from "@/assets/Card/Bhajans & Kirtan.jpeg";
+import cardBhagavadGita from "@/assets/Card/Bhagavad Gita Wisdom.jpeg";
+import cardSpiritualCounselling from "@/assets/Card/Spiritual Counselling.jpeg";
+import cardHealingSessions from "@/assets/Card/Healing Sessions.jpeg";
+import cardSatsang from "@/assets/Card/Satsang.jpeg";
+import cardYoga from "@/assets/Card/Yoga.jpeg";
+import cardSattvicBhojan from "@/assets/Card/Sattvic Bhojan.jpeg";
+import cardSeva from "@/assets/Card/Seva.jpeg";
 import { ConsultationModal } from "@/components/ConsultationModal";
 import { LegalDialog } from "@/components/LegalDialog";
 import { LoadingScreen } from "@/components/LoadingScreen";
@@ -58,7 +66,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Welcome to Radhe Krishna Tapovan. A sacred home where every soul is invited to experience the eternal love of Sri Radha and Sri Krishna through devotion, meditation, seva, and joyful living.",
+          "Welcome to Radhe Krishna Tapovan. A sacred home where every soul is invited to experience the eternal love of Sri Radhe and Sri Krishna through devotion, meditation, seva, and joyful living.",
       },
     ],
   }),
@@ -111,26 +119,14 @@ function Reveal({
   );
 }/* -------- Section Header (Centered) -------- */
 const SectionHeaderCenter = ({
-  number,
-  eyebrow,
   title,
   subtitle,
 }: {
-  number: string;
-  eyebrow: string;
   title: string;
   subtitle?: string;
 }) => (
-  <div className="text-center max-w-2xl mx-auto mb-14">
-    <div className="inline-flex items-center gap-2 mb-3">
-      <span className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/60 bg-[#FAECBC] text-[11px] font-bold text-brown shadow-sm">
-        {number}
-      </span>
-      <span className="text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
-        {eyebrow}
-      </span>
-    </div>
-    <h2 className="font-display text-3xl sm:text-4xl text-[#2B1208] font-normal tracking-tight">
+  <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+    <h2 className="font-display text-3xl sm:text-4xl text-[#7A1717] font-normal tracking-tight">
       {title}
     </h2>
     <div className="gold-line mt-4 mx-auto w-28" />
@@ -139,19 +135,6 @@ const SectionHeaderCenter = ({
         {subtitle}
       </p>
     )}
-  </div>
-);
-
-/* -------- Section Badge Marker -------- */
-const SectionBadge = ({ number, title }: { number: string; title: string }) => (
-  <div className="flex items-center gap-3 mb-3">
-    <span className="flex h-7 w-7 items-center justify-center rounded-full border border-gold/60 bg-[#FAECBC] text-[11px] font-bold text-brown shadow-sm">
-      {number}
-    </span>
-    <span className="text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
-      {title}
-    </span>
-    <span className="h-px w-8 bg-gradient-to-r from-gold/50 to-transparent" />
   </div>
 );
 
@@ -189,18 +172,17 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-[#FFFDF8]/95 backdrop-blur-md py-3.5 border-b border-[#A9691C]/20 shadow-sm"
           : "bg-gradient-to-b from-[#FFFDF8]/95 via-[#FFFDF8]/60 to-transparent py-5"
-      }`}
+        }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
         <a href="#hero" className="group flex items-center shrink-0">
           <img
             src="/Logo.jpeg"
             alt="Radhe Krishna Tapovan Logo"
-            className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl object-cover border-2 border-[#D49D44] bg-[#FFFFFF] p-0.5 shadow-[0_6px_25px_rgba(212,157,68,0.35)] group-hover:shadow-[0_8px_30px_rgba(212,157,68,0.5)] group-hover:scale-105 transition-all duration-300 transform shrink-0"
+            className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl object-cover border-none bg-transparent shadow-none group-hover:scale-105 transition-all duration-300 transform shrink-0"
           />
         </a>
 
@@ -218,16 +200,6 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden items-center gap-4 md:flex">
-          <button
-            onClick={() => onOpenConsultation("General Sanctuary Visit")}
-            className="btn-red-luxury rounded-md px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
-          >
-            Plan Your Visit
-          </button>
-        </div>
-
         {/* Animated Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -235,19 +207,16 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
           aria-label="Toggle menu"
         >
           <span
-            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
-              mobileMenuOpen ? "rotate-45 translate-y-[6.5px]" : ""
-            }`}
+            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${mobileMenuOpen ? "rotate-45 translate-y-[6.5px]" : ""
+              }`}
           />
           <span
-            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 ${
-              mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
-            }`}
+            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 ${mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
+              }`}
           />
           <span
-            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${
-              mobileMenuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
-            }`}
+            className={`h-0.5 w-5 bg-[#4B301B] rounded-full transition-all duration-300 transform origin-center ${mobileMenuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
+              }`}
           />
         </button>
       </div>
@@ -266,15 +235,6 @@ function Navigation({ onOpenConsultation }: { onOpenConsultation: (program?: str
                 {link.label}
               </a>
             ))}
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenConsultation("General Sanctuary Visit");
-              }}
-              className="mt-3 w-full btn-red-luxury py-3 text-xs uppercase tracking-[0.2em] font-semibold rounded-md"
-            >
-              Plan Your Visit
-            </button>
           </nav>
         </div>
       )}
@@ -332,10 +292,10 @@ export default function IndexPage() {
           <img
             src={heroImg}
             alt="Radha Krishna Sanctuary"
-            className="h-full w-full object-cover object-[75%_center] opacity-60 anim-slow-zoom"
+            className="h-full w-full object-cover object-[75%_center] opacity-80 anim-slow-zoom"
           />
-          <div className="absolute inset-0 bg-radial from-transparent via-[#FFFDF8]/40 to-[#FFFDF8]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8] via-[#FFFDF8]/30 to-transparent" />
+          <div className="absolute inset-0 bg-radial from-transparent via-[#FFFDF8]/30 to-[#FFFDF8]/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8] via-[#FFFDF8]/20 to-transparent" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 w-full py-8">
@@ -370,64 +330,61 @@ export default function IndexPage() {
                   <span>Begin Your Journey</span>
                   <ChevronRight className="h-4 w-4 text-[#FFFDF8]" />
                 </button>
-
-                <a
-                  href="#about"
-                  className="btn-red-luxury-outline inline-flex items-center gap-2 rounded-md px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] cursor-pointer"
-                >
-                  <span>Our Tapovan</span>
-                  <ArrowUpRight className="h-4 w-4 text-[#7A1717]" />
-                </a>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Five Pillars Grid */}
-          <div className="mt-16 border-t border-[#A9691C]/20 pt-10">
-            <Reveal delay={400}>
-              <div className="text-xs uppercase tracking-[0.25em] text-[#A9691C] font-semibold mb-6">
-                Five Pillars of Tapovan
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                {[
-                  { title: "Devotion", desc: "Feel the presence of Krishna", icon: Heart },
-                  { title: "Meditation", desc: "Discover inner peace", icon: Flower2 },
-                  { title: "Seva", desc: "Serve with love and compassion", icon: HandHeart },
-                  { title: "Wisdom", desc: "Learn from the Bhagavad Gita", icon: BookOpen },
-                  { title: "Community", desc: "Live in a spiritual family", icon: Users },
-                ].map((pillar, idx) => {
-                  const IconComp = pillar.icon;
-                  return (
-                    <div
-                      key={pillar.title}
-                      className="p-4 rounded-xl border border-[#A9691C]/20 bg-[#FFFFFF] backdrop-blur-sm hover:border-[#D49D44] transition duration-300 shadow-sm"
-                    >
-                      <div className="h-8 w-8 rounded-lg bg-[#FFF8E8] border border-[#D49D44]/30 flex items-center justify-center text-[#4B301B] mb-3">
-                        <IconComp className="h-4 w-4" />
-                      </div>
-                      <div className="font-display text-base font-medium text-[#2B1208]">
-                        {pillar.title}
-                      </div>
-                      <div className="text-xs text-[#4B301B] mt-1 font-sans">
-                        {pillar.desc}
-                      </div>
-                    </div>
-                  );
-                })}
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
+      {/* FOUNDER'S MESSAGE (SHORTFORM) */}
+      <section className="py-16 bg-[#FFFDF8] border-b border-[#A9691C]/20 relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-4 flex justify-center">
+              <Reveal>
+                <div className="relative rounded-2xl overflow-hidden border border-[#A9691C]/25 shadow-xl max-w-[280px] sm:max-w-[320px]">
+                  <img
+                    src={founderImg}
+                    alt="Sri Krishna Abhirra portrait"
+                    className="w-full h-auto max-h-[420px] object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8] via-transparent to-transparent" />
+                </div>
+              </Reveal>
+            </div>
+            <div className="lg:col-span-8">
+              <Reveal delay={100}>
+                <span className="text-xs uppercase tracking-[0.25em] text-[#D49D44] font-semibold block mb-2">
+                  Founder's Message
+                </span>
+                <h2 className="font-display text-2xl sm:text-3xl text-[#7A1717] font-normal">
+                  A Message from Sri Krishna Abhirra
+                </h2>
+                <div className="gold-line mt-3 w-24 mb-5" />
+                <blockquote className="space-y-3 font-sans text-base text-[#4B301B] leading-relaxed italic border-l-2 border-[#D49D44] pl-4">
+                  <p className="font-medium text-[#2B1208] not-italic">
+                    "My life is an offering at the lotus feet of Sri Radha and Sri Krishna."
+                  </p>
+                  <p>
+                    "Through Radhe Krishna Tapovan, my prayer is to create a place where every soul can experience divine love, every woman can rediscover her strength and dignity, and every visitor can feel the living presence of Krishna in daily life."
+                  </p>
+                </blockquote>
+                <div className="mt-4 font-display text-base text-[#2B1208] font-medium">
+                  — Sri Krishna Abhirra, <span className="text-sm text-[#4B301B] font-normal font-sans">Founder</span>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 02. OUR TAPOVAN */}
-      <section id="about" className="py-24 bg-[#FFF8E8] border-b border-[#A9691C]/20 relative">
+      <section id="about" className="py-16 sm:py-20 bg-[#FFF8E8] border-b border-[#A9691C]/20 relative">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
               <Reveal>
-                <SectionBadge number="02" title="Our Purpose" />
-                <h2 className="mt-2 font-display text-3xl sm:text-4xl text-[#2B1208] font-normal">
+                <h2 className="font-display text-3xl sm:text-4xl text-[#2B1208] font-normal">
                   Our Tapovan
                 </h2>
                 <div className="gold-line mt-3 w-28 mb-6" />
@@ -449,12 +406,12 @@ export default function IndexPage() {
 
               <Reveal delay={250}>
                 <div className="mt-8">
-                  <button
-                    onClick={() => handleOpenConsultation("Read More About Tapovan")}
-                    className="rounded-md border border-[#D49D44] bg-[#FFFFFF] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-[#4B301B] hover:bg-[#FFF8E8] transition cursor-pointer shadow-sm"
+                  <a
+                    href="#seva"
+                    className="inline-block rounded-md border border-[#D49D44] bg-[#FFFFFF] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-[#4B301B] hover:bg-[#FFF8E8] transition cursor-pointer shadow-sm"
                   >
                     Read More
-                  </button>
+                  </a>
                 </div>
               </Reveal>
             </div>
@@ -465,7 +422,7 @@ export default function IndexPage() {
                   <img
                     src={tapovanImg}
                     alt="Tapovan Sanctuary Grounds"
-                    className="w-full h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-[460px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8E8] via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 border-l-2 border-[#D49D44] pl-4 text-[#2B1208]">
@@ -483,11 +440,9 @@ export default function IndexPage() {
       <SacredDivider />
 
       {/* 03. THE HEART OF YUGALA */}
-      <section id="values" className="py-24 bg-[#FFFDF8] border-b border-[#A9691C]/20">
+      <section id="values" className="py-16 sm:py-20 bg-[#FFFDF8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="03"
-            eyebrow="Guiding Principles"
             title="The Heart of Yugala"
             subtitle="A way of living inspired by the love, wisdom, and compassion of Sri Radha and Sri Krishna."
           />
@@ -560,11 +515,9 @@ export default function IndexPage() {
       </section>
 
       {/* 04. EXPERIENCE THE TAPOVAN */}
-      <section id="offerings" className="py-24 bg-[#FFF8E8] border-b border-[#A9691C]/20">
+      <section id="offerings" className="py-16 sm:py-20 bg-[#FFF8E8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="04"
-            eyebrow="Daily Practices"
             title="Experience the Tapovan"
             subtitle="Every day at the Tapovan is an invitation to slow down, reconnect, and experience devotion."
           />
@@ -573,43 +526,33 @@ export default function IndexPage() {
             {[
               { title: "Morning Mangala Arati", desc: "Begin the day in prayer and divine remembrance.", img: diyaImg },
               { title: "Guided Meditation", desc: "Discover stillness, awareness, and inner peace.", img: galleryMeditation },
-              { title: "Bhajans & Kirtan", desc: "Experience devotion through sacred music and joyful singing.", img: fluteImg },
-              { title: "Bhagavad Gita Wisdom", desc: "Explore timeless wisdom for meaningful everyday living.", img: rasaImg },
-              { title: "Spiritual Counselling", desc: "Find a compassionate space for reflection, guidance, and inner growth.", img: galleryAshram },
-              { title: "Healing Sessions", desc: "Experience peaceful practices that nurture body, mind, and spirit.", img: galleryHealing },
-              { title: "Satsang", desc: "Come together in the company of seekers, devotees, and spiritual wisdom.", img: tapovanImg },
-              { title: "Yoga", desc: "Bring harmony to body, breath, mind, and consciousness.", img: heroImg },
+              { title: "Bhajans & Kirtan", desc: "Experience devotion through sacred music and joyful singing.", img: cardBhajansKirtan },
+              { title: "Bhagavad Gita Wisdom", desc: "Explore timeless wisdom for meaningful everyday living.", img: cardBhagavadGita },
+              { title: "Spiritual Counselling", desc: "Find a compassionate space for reflection, guidance, and inner growth.", img: cardSpiritualCounselling },
+              { title: "Healing Sessions", desc: "Experience peaceful practices that nurture body, mind, and spirit.", img: cardHealingSessions },
+              { title: "Satsang", desc: "Come together in the company of seekers, devotees, and spiritual wisdom.", img: cardSatsang },
+              { title: "Yoga", desc: "Bring harmony to body, breath, mind, and consciousness.", img: cardYoga },
               { title: "Nature Walks", desc: "Reconnect with the beauty and quietness of nature.", img: galleryTemple },
               { title: "Tulasi Garden", desc: "Spend peaceful moments surrounded by sacred greenery.", img: galleryAshram },
-              { title: "Sattvic Bhojan", desc: "Share simple, nourishing vegetarian food prepared with love.", img: diyaImg },
-              { title: "Seva", desc: "Transform everyday service into an offering of devotion.", img: rasaImg },
+              { title: "Sattvic Bhojan", desc: "Share simple, nourishing vegetarian food prepared with love.", img: cardSattvicBhojan },
+              { title: "Seva", desc: "Transform everyday service into an offering of devotion.", img: cardSeva },
             ].map((item, idx) => (
               <Reveal key={item.title} delay={idx * 50}>
-                <div
-                  onClick={() => handleOpenConsultation(item.title)}
-                  className="group relative h-72 rounded-xl overflow-hidden border border-[#A9691C]/20 bg-[#FFFFFF] shadow-sm hover:border-[#D49D44] transition duration-300 cursor-pointer flex flex-col justify-end p-5"
-                >
+                <div className="group relative h-64 rounded-xl overflow-hidden border border-[#A9691C]/20 bg-[#FFFFFF] shadow-sm flex flex-col justify-end p-5">
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="absolute inset-0 h-full w-full object-cover opacity-45 transition-transform duration-700 group-hover:scale-110"
+                    className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#2B1208] via-[#2B1208]/60 to-transparent" />
-                  
+
                   <div className="relative z-10">
-                    <span className="text-[10px] uppercase tracking-widest text-[#EEC87B] font-semibold bg-[#2B1208]/70 px-2.5 py-1 rounded border border-gold/40 inline-block mb-2">
-                      Tapovan Experience
-                    </span>
                     <h3 className="font-display text-xl text-ivory font-medium group-hover:text-gold transition">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-ivory/90 mt-1 line-clamp-2">
+                    <p className="text-xs text-ivory/90 mt-1.5 leading-relaxed">
                       {item.desc}
                     </p>
-                    <div className="mt-3 flex items-center gap-1.5 text-xs text-[#EEC87B] font-semibold uppercase tracking-wider">
-                      <span>Reserve Experience</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -627,118 +570,17 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* 05. LIFE AT THE TAPOVAN */}
-      <section id="life" className="py-24 bg-[#FFFDF8] border-b border-[#A9691C]/20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <SectionHeaderCenter
-            number="05"
-            eyebrow="Living Sanctuary"
-            title="Life at the Tapovan"
-            subtitle="A living spiritual home where devotion becomes part of everyday life."
-          />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {[
-              { title: "Singing Together", desc: "Sharing devotion through music, prayer, and kirtan." },
-              { title: "Children Laughing", desc: "Creating a joyful environment where children can learn, play, and grow." },
-              { title: "Women Learning", desc: "Encouraging learning, confidence, dignity, and self-discovery." },
-              { title: "Silent Meditation", desc: "Finding moments of stillness amidst the rhythm of everyday life." },
-              { title: "Cooking Together", desc: "Preparing food with love and sharing it as an offering." },
-              { title: "Flower Decoration", desc: "Expressing devotion through flowers, beauty, and creativity." },
-              { title: "Krishna Festivals", desc: "Celebrating divine love with music, colour, prayer, and togetherness." },
-              { title: "Cow Seva", desc: "Serving and caring for cows with love and compassion." },
-              { title: "Garden Life", desc: "Living close to nature and appreciating its quiet beauty." },
-              { title: "Shared Meals", desc: "Coming together around simple, nourishing sattvic food." },
-              { title: "Prayer & Satsang", desc: "Growing together through prayer, wisdom, and spiritual fellowship." },
-              { title: "Joyful Community", desc: "Living together with love, compassion, respect, and devotion." },
-            ].map((life, idx) => (
-              <Reveal key={life.title} delay={idx * 50}>
-                <div className="p-5 rounded-xl border border-[#A9691C]/20 bg-[#FFFFFF] h-full hover:border-[#D49D44] transition duration-300 flex flex-col justify-between shadow-sm">
-                  <div>
-                    <h3 className="font-display text-lg text-[#2B1208] font-medium">{life.title}</h3>
-                    <p className="text-xs text-[#4B301B] mt-1.5 leading-relaxed font-sans">{life.desc}</p>
-                  </div>
-                  <div className="gold-line mt-4 w-full" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={200}>
-            <div className="p-6 rounded-xl border border-[#A9691C]/20 bg-[#FFFFFF] text-center max-w-3xl mx-auto shadow-sm">
-              <p className="font-display text-lg sm:text-xl text-[#2B1208] italic">
-                "A place where every moment is filled with devotion, love, joy, learning, and togetherness."
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 06. WOMEN'S SANCTUARY */}
-      <section className="py-24 bg-[#FFF8E8] border-b border-[#A9691C]/20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6">
-              <Reveal>
-                <SectionBadge number="06" title="Nurturing Hope" />
-                <h2 className="mt-2 font-display text-3xl sm:text-4xl text-[#2B1208] font-normal">
-                  Women's Sanctuary
-                </h2>
-                <p className="mt-3 text-lg font-display text-[#4B301B] italic">
-                  "Every woman deserves love, respect, dignity, and the opportunity to begin again."
-                </p>
-              </Reveal>
-
-              <Reveal delay={150}>
-                <div className="mt-5 space-y-4 text-sm sm:text-base text-[#4B301B] leading-relaxed font-sans">
-                  <p>
-                    Through spiritual guidance, education, skill development, accommodation, holistic wellness, and compassionate care, we aspire to help women rediscover confidence, purpose, and inner strength.
-                  </p>
-                  <p>
-                    Our sanctuary seeks to create a safe and nurturing space where women can pause, heal, learn, grow, and step forward with renewed confidence.
-                  </p>
-                </div>
-              </Reveal>
-
-              <Reveal delay={250}>
-                <div className="mt-8">
-                  <button
-                    onClick={() => handleOpenConsultation("Women's Sanctuary")}
-                    className="rounded-md bg-[#D49D44] hover:bg-[#A9691C] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#2B1208] transition cursor-pointer shadow-sm"
-                  >
-                    Discover the Sanctuary
-                  </button>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-6">
-              <Reveal delay={200}>
-                <div className="relative rounded-xl overflow-hidden border border-[#A9691C]/20 shadow-xl">
-                  <img
-                    src={galleryHealing}
-                    alt="Women Sanctuary Atmosphere"
-                    className="w-full h-[440px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8E8] via-transparent to-transparent" />
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 07. SPIRITUAL JOURNEYS */}
-      <section id="programs" className="py-24 bg-[#FFFDF8] border-b border-[#A9691C]/20">
+      <section id="programs" className="py-16 sm:py-20 bg-[#FFFDF8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="07"
-            eyebrow="Retreats & Programs"
             title="Spiritual Journeys"
             subtitle="Come for a day, stay for a while, or walk deeper into your spiritual journey."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "One Day with Krishna",
@@ -747,10 +589,6 @@ export default function IndexPage() {
               {
                 title: "Weekend in Vrindavan",
                 desc: "Step away from everyday life and reconnect with devotion, nature, and inner peace.",
-              },
-              {
-                title: "Seven Days of Inner Transformation",
-                desc: "A deeper journey through meditation, wisdom, reflection, devotion, and conscious living.",
               },
               {
                 title: "Children's Gurukulam",
@@ -767,10 +605,6 @@ export default function IndexPage() {
               {
                 title: "Bhagavad Gita Journey",
                 desc: "Explore timeless wisdom and discover its meaning in everyday life.",
-              },
-              {
-                title: "Prolonged Retreats",
-                desc: "Spend more time within the peaceful rhythm of the Tapovan and deepen your spiritual journey.",
               },
             ].map((journey, idx) => (
               <Reveal key={journey.title} delay={idx * 60}>
@@ -800,16 +634,14 @@ export default function IndexPage() {
       </section>
 
       {/* 08. CELEBRATIONS */}
-      <section id="celebrations" className="py-24 bg-[#FFF8E8] border-b border-[#A9691C]/20">
+      <section id="celebrations" className="py-16 sm:py-20 bg-[#FFF8E8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="08"
-            eyebrow="Sacred Festivals"
             title="Celebrations"
             subtitle="Where devotion becomes music, colour, celebration, and togetherness."
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { title: "Janmashtami", desc: "Celebrate the divine appearance of Sri Krishna with devotion and joy." },
               { title: "Radhashtami", desc: "Honour the divine love and grace of Sri Radha." },
@@ -818,7 +650,6 @@ export default function IndexPage() {
               { title: "Pournami", desc: "Gather under the fullness of the moon for prayer, meditation, and spiritual reflection." },
               { title: "Kirtan Evenings", desc: "Come together through sacred music, chanting, and joyful devotion." },
               { title: "Rasa Celebration", desc: "Celebrate the timeless divine love of Radha and Krishna." },
-              { title: "Annadanam", desc: "Share food as an offering of love and compassion." },
               { title: "Bhajan Festivals", desc: "Experience devotion through sacred songs and collective prayer." },
               { title: "Seva & Community Events", desc: "Come together to serve, celebrate, and strengthen the spirit of community." },
             ].map((fest, idx) => (
@@ -846,13 +677,64 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* 09. YUGALA SPIRITUAL STORE */}
-      <section id="store" className="py-24 bg-[#FFFDF8] border-b border-[#A9691C]/20">
+      {/* WOMEN EMPOWERMENT */}
+      <section id="women-empowerment" className="py-16 sm:py-20 bg-[#FFF8E8] border-b border-[#A9691C]/20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-6">
+              <Reveal>
+                <h2 className="font-display text-3xl sm:text-4xl text-[#2B1208] font-normal">
+                  Women Empowerment
+                </h2>
+                <p className="mt-3 text-lg font-display text-[#4B301B] italic">
+                  "Every woman deserves love, respect, dignity, and the opportunity to begin again."
+                </p>
+              </Reveal>
+
+              <Reveal delay={150}>
+                <div className="mt-5 space-y-4 text-sm sm:text-base text-[#4B301B] leading-relaxed font-sans">
+                  <p>
+                    Through spiritual guidance, education, skill development, accommodation, holistic wellness, and compassionate care, we aspire to help women rediscover confidence, purpose, and inner strength.
+                  </p>
+                  <p>
+                    Our sanctuary seeks to create a safe and nurturing space where women can pause, heal, learn, grow, and step forward with renewed confidence.
+                  </p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={250}>
+                <div className="mt-8">
+                  <button
+                    onClick={() => handleOpenConsultation("Women Empowerment")}
+                    className="rounded-md bg-[#D49D44] hover:bg-[#A9691C] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#2B1208] transition cursor-pointer shadow-sm"
+                  >
+                    Discover Women Empowerment
+                  </button>
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-6">
+              <Reveal delay={200}>
+                <div className="relative rounded-xl overflow-hidden border border-[#A9691C]/20 shadow-xl">
+                  <img
+                    src={galleryHealing}
+                    alt="Women Empowerment Atmosphere"
+                    className="w-full h-auto max-h-[440px] object-cover rounded-xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8E8] via-transparent to-transparent" />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 09. RADHE KRISHNA SPIRITUAL STORE */}
+      <section id="store" className="py-16 sm:py-20 bg-[#FFFDF8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="09"
-            eyebrow="Sacred Boutique"
-            title="Yugala Spiritual Store"
+            title="Radhe Krishna Spiritual Store"
             subtitle="Sacred and meaningful offerings to carry a little of the Tapovan home with you."
           />
 
@@ -899,11 +781,9 @@ export default function IndexPage() {
       </section>
 
       {/* 10. SEVA */}
-      <section id="seva" className="py-24 bg-[#FFF8E8] border-b border-[#A9691C]/20">
+      <section id="seva" className="py-16 sm:py-20 bg-[#FFF8E8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="10"
-            eyebrow="Selfless Service"
             title="Seva"
             subtitle="Service becomes sacred when it is offered with love."
           />
@@ -949,7 +829,7 @@ export default function IndexPage() {
       </section>
 
       {/* 11. FOUNDER'S MESSAGE */}
-      <section className="py-24 bg-[#FFFDF8] border-b border-[#A9691C]/20">
+      <section className="py-16 sm:py-20 bg-[#FFFDF8] border-b border-[#A9691C]/20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
@@ -958,7 +838,7 @@ export default function IndexPage() {
                   <img
                     src={founderImg}
                     alt="Sri Krishna Abhirra portrait"
-                    className="w-full h-[440px] object-cover object-top"
+                    className="w-full h-auto max-h-[460px] object-cover object-top rounded-xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8] via-transparent to-transparent" />
                 </div>
@@ -967,11 +847,10 @@ export default function IndexPage() {
 
             <div className="lg:col-span-7">
               <Reveal>
-                <SectionBadge number="11" title="Spiritual Guidance" />
-                <h2 className="mt-2 font-display text-3xl sm:text-4xl text-[#2B1208] font-normal">
+                <h2 className="font-display text-3xl sm:text-4xl text-[#7A1717] font-normal">
                   Founder's Message
                 </h2>
-                <h3 className="mt-1 text-lg font-display text-[#4B301B] font-medium">
+                <h3 className="mt-1 text-lg font-display text-[#7A1717] font-medium">
                   A Message from Sri Krishna Abhirra
                 </h3>
                 <div className="gold-line mt-3 w-32 mb-6" />
@@ -997,7 +876,7 @@ export default function IndexPage() {
       </section>
 
       {/* 12. VISIT THE TAPOVAN */}
-      <section id="contact" className="py-24 bg-[#FFF8E8] border-b border-[#A9691C]/20 relative overflow-hidden">
+      <section id="contact" className="py-16 sm:py-20 bg-[#FFF8E8] border-b border-[#A9691C]/20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src={tapovanImg} alt="Tapovan Entrance" className="w-full h-full object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8E8] via-[#FFF8E8]/80 to-[#FFF8E8]" />
@@ -1005,8 +884,6 @@ export default function IndexPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
           <SectionHeaderCenter
-            number="12"
-            eyebrow="Sanctuary Invitation"
             title="Visit the Tapovan"
             subtitle="Come as you are. Spend a moment, stay for a while, and experience the peace of the Tapovan."
           />
@@ -1050,11 +927,10 @@ export default function IndexPage() {
       </section>
 
       {/* 13. OUR NEXT DIVINE PROJECT (TRIDEVANA) */}
-      <section id="tridevana" className="py-24 bg-[#2B1208] text-[#FFF8E8] border-b border-[#D49D44]/30 relative">
+      <section id="tridevana" className="py-16 sm:py-20 bg-[#2B1208] text-[#FFF8E8] border-b border-[#D49D44]/30 relative">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <SectionBadge number="13" title="Vision for the Future" />
               <span className="text-xs uppercase tracking-[0.3em] text-[#EEC87B] font-bold block mb-2">
                 OUR NEXT DIVINE PROJECT
               </span>
@@ -1185,7 +1061,7 @@ export default function IndexPage() {
                 <img
                   src="/Logo.jpeg"
                   alt="Radhe Krishna Tapovan Logo"
-                  className="h-14 w-14 rounded-xl object-cover border-2 border-[#D49D44] shadow-md shrink-0"
+                  className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl object-cover border-none bg-transparent shadow-none shrink-0"
                 />
                 <div className="font-display text-base tracking-[0.15em] text-[#EEC87B] font-medium">
                   RADHE KRISHNA TAPOVAN
@@ -1285,7 +1161,7 @@ export default function IndexPage() {
 
           <div className="mt-12 pt-6 border-t border-[#D49D44]/20 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FFF8E8]/60 gap-3">
             <div>
-              © 2025 Yugala Radhe Krishna Tapovan. All Rights Reserved.
+              © 2025 Radhe Krishna Tapovan. All Rights Reserved.
             </div>
             <div className="text-[#EEC87B] font-medium tracking-widest font-serif">
               ॥ Radhe Radhe · Hare Krishna ॥
